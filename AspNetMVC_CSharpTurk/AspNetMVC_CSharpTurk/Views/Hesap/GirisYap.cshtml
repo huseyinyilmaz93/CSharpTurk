@@ -1,0 +1,107 @@
+﻿@model AspNetMVC_CSharpTurk.Models.AccountModels.Login
+@{
+    ViewBag.Title = "Giriş Ekranı | CSharpTurk";
+}
+
+<h2>Giriş Yap</h2>
+<script>
+    var module = angular.module('angular');
+    module.controller('GirisYapController', ['$scope', '$http', function ($scope,$http) {
+        $scope.kullanici = {};
+        $scope.oturumAc = {};
+        $scope.tumHatalar = {};
+        $scope.submitForm = function () {
+            $http({
+                method: 'POST',
+                url: '/api/HesapAPI/GirisYap',
+                contentType: 'application/json',
+                data: $scope.kullanici,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                }
+            }).success(function (data, status, headers, config) {
+                    $http({
+                        method: 'POST',
+                        url: '/Hesap/Giris',
+                        contentType: 'application/json',
+                        data: data,
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        transformRequest: function (obj) {
+                            var str = [];
+                            for (var p in obj)
+                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                            return str.join("&");
+                        }
+                    }).success(function (data, status, headers, config) {
+                        if (status == 200) {
+                            if (data == "Admin") {
+                                window.location = "/Admin/Index";
+                            } else if (data == "Yazar") {
+                                window.location = "/Yazar/Index";
+                            } else if (data == "OturumHatasi") {
+                                alert('Oturum açarken hata oluştu. Tekrar deneyin.');
+                                window.location.reload();
+                            } else {
+                                window.location = "/Makale/Makaleler";
+                            }
+                        }
+                        
+                    }).error(function (data, status, headers, config) {
+                        //window.location.reload();
+                        $scope.tumHatalar = data.ModelState;
+                    })
+            }).error(function (data, status, headers, config) {
+                //window.location.reload();
+                $scope.tumHatalar = data.ModelState;
+            })
+        }
+    }]);
+</script>
+<div class="row">
+    <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+
+        <form name="GirisYap" ng-submit="submitForm()" ng-controller="GirisYapController">
+            <div class="form-horizontal">
+                <h4>Giriş Yap</h4>
+                <hr />
+                <ul ng-repeat="alan in tumHatalar">
+                    <li style="color:red" ng-repeat="hata in alan">{{hata}}</li>
+                </ul>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="kullaniciAdi" ng-model="kullanici.UserName">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="password" class="form-control" name="sifre" ng-model="kullanici.Password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+<!--
+    @Html.LabelFor(model => model.RememberMe, new { @class = "control-label col-md-2" })
+    -->
+                    <div class="col-md-10">
+                        <input ng-hide="true" type="checkbox" hidden="hidden" class="form-control" name="beniHatirla" ng-model="kullanici.RememberMe"><br>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Giriş Yap" class="form-control btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+</div>

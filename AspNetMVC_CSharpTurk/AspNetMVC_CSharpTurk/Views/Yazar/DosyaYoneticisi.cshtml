@@ -1,0 +1,581 @@
+﻿
+@{
+    ViewBag.Title = "DosyaYoneticisi | CSharpTürk";
+}
+
+<script>
+    var module = angular.module('angular');
+    module.controller('dosyaYoneticisiController',['$scope','$http','$timeout', function ($scope,$http,$timeout) {
+        $scope.dosyalar = {};
+        $scope.dosyaBilgi = {};
+        $scope.dosyaBilgiGorunum = false;
+        $scope.dosyaTasimaGorunum = true;
+        $scope.dosyaTasimaModalGorunum = false;
+        $scope.progressBarGorunum = true;
+        $scope.gecerliDosyaYolu = {};
+        $scope.d = "~/Files/Uploads/" + $scope.userName;
+        $scope.userName = '@ViewBag.userName';
+        $http({
+            method: 'GET', url: '/api/FileManagerAPI/KullaniciAnaDizin/' + $scope.userName,
+        }).success(function (data, status, headers, config) {
+            $scope.dosyalar = data;
+            $scope.gecerliDosyaYolu = "~/Files/Uploads/" + $scope.userName;
+        }).error(function (data, status, headers, config) {
+            alert('Ana dizine ait dosyalar alınamadı. Tekrar deneyin.');
+        });
+        $scope.DosyaClick = function (dosyaYolu, dosyaTuru) {
+            if (dosyaTuru == 'dir') {
+                $http({
+                    method: 'GET', url: '/api/FileManagerAPI/AltDizin/' + dosyaYolu.split('/').join('.-123-.')
+                }).success(function (data, status, headers, config) {
+                    $scope.dosyalar = data;
+                    $scope.gecerliDosyaYolu = dosyaYolu;
+                }).error(function (data, status, headers, config) {
+                    alert('Dosyalar alınamadı!');
+                })
+            } else $scope.BilgiGetir(dosyaYolu);
+        };
+        $scope.yeniKlasor = "Yeni Klasör";
+        $scope.yeniKlasorGorunum = false;
+        $scope.yeniKlasorEkleme = function () {
+            $scope.yeniKlasorGorunum = !$scope.yeniKlasorGorunum;
+        };
+        $scope.KlasorEkle = function (klasorAdi) {
+            $scope.yeniKlasorGorunum = !$scope.yeniKlasorGorunum;
+            $scope.fxDosyaYolu = $scope.gecerliDosyaYolu;
+            $scope.fxDosyaYolu = $scope.fxDosyaYolu.split('/').join('.-123-.');
+            $http({
+                method: 'GET', url: '/api/FileManagerAPI/KlasorEkle/',
+                params: {
+                    dosyaYolu: $scope.fxDosyaYolu,
+                    dosyaAdi: klasorAdi,
+                }
+            }).success(function (data, status, headers, config) {
+                $scope.dosyalar = data;
+                $scope.yeniKlasor = "Yeni Klasör";
+            }).error(function (data, status, headers, config) {
+                alert('Dosyalar alınamadı!');
+            })
+
+        };
+        $scope.Sil = function (dosyaYolu, dosyaAdi) {
+            dosyaYolu = dosyaYolu.split('/').join('.-123-.');
+            $http({
+                    method: 'POST',
+                    url: '/api/FileManagerAPI/Sil',
+                    contentType: 'application/json',
+                    data: {
+                        Yol: $scope.gecerliDosyaYolu,
+                        DosyaAdi: dosyaAdi,
+                    },
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function (obj) {
+                        var str = [];
+                        for (var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        return str.join("&");
+                    }
+            }).success(function (data, status, headers, config) {
+                $scope.dosyalar = data;
+            }).error(function (data, status, headers, config) {
+                alert('Dosyalar alınamadı!');
+            })
+        };
+        $scope.Geri = function () {
+            $scope.fxDosyaYolu = $scope.gecerliDosyaYolu;
+            if (angular.equals($scope.fxDosyaYolu,'~/Files/Uploads/' + $scope.userName)) {
+                alert('Erişim Engellendi!');
+                return;
+            };
+            $scope.fxDosyaYolu = $scope.fxDosyaYolu.substring(0, $scope.fxDosyaYolu.lastIndexOf('/'));
+            $http({
+                method: 'GET', url: '/api/FileManagerAPI/Geri',
+                params: {
+                    dosyaYolu: $scope.fxDosyaYolu.split('/').join('.-123-.')
+                }
+            }).success(function (data, status, headers, config) {
+                $scope.dosyalar = data;
+                $scope.gecerliDosyaYolu = $scope.fxDosyaYolu;
+            }).error(function (data, status, headers, config) {
+                alert('Dosyalar alınamadı!');
+            })
+        };
+        $scope.yenidenAdlandirma = {};
+        $scope.yenidenAdlandirmaGorunum = false;
+        $scope.dosyaSec = function (dosyaYolu,dosyaTuru,dosyaAdi) {
+            $scope.yenidenAdlandirmaGorunum = !$scope.yenidenAdlandirmaGorunum;
+            $scope.yenidenAdlandirma.EskiAd = dosyaAdi;
+            $scope.yenidenAdlandirma.DosyaAdi = dosyaAdi;
+            $scope.yenidenAdlandirma.DosyaTuru = dosyaTuru;
+            $scope.yenidenAdlandirma.DosyaYolu = dosyaYolu;
+        };
+        $scope.YenidenAdlandir = function (dosyaYolu, dosyaAdi) {
+            $scope.yenidenAdlandirmaGorunum = !$scope.yenidenAdlandirmaGorunum;
+            $http({
+                method: 'POST',
+                url: '/api/FileManagerAPI/YenidenAdlandir',
+                contentType: 'application/json',
+                data: {
+                    Yol: $scope.gecerliDosyaYolu,
+                    EskiIsim : $scope.yenidenAdlandirma.EskiAd,
+                    YeniIsim: dosyaAdi,
+                },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                }
+            }).success(function (data, status, headers, config) {
+                $scope.dosyalar = data;
+            }).error(function (data, status, headers, config) {
+                alert('Dosyalar alınamadı!');
+            })
+
+        };
+        //DOSYA UPLOAD BASLANGIC
+        $scope.getFileDetails = function (e) {
+
+            $scope.files = [];
+            $scope.$apply(function () {
+
+                // STORE THE FILE OBJECT IN AN ARRAY.
+                for (var i = 0; i < e.files.length; i++) {
+                    $scope.files.push(e.files[i])
+                }
+
+            });
+        };
+        $scope.uploadFiles = function () {
+            if ($scope.files.length <= 0) return;
+            $scope.progressBarGorunum = false;
+            document.getElementById('den').innerHTML = "Yükleniyor ..";
+            //FILL FormData WITH FILE DETAILS.
+            var datas = new FormData();
+
+            for (var i in $scope.files) {
+                datas.append("uploadedFile", $scope.files[i]);
+            }
+
+            // ADD LISTENERS.
+            var objXhr = new XMLHttpRequest();
+            objXhr.upload.addEventListener("progress", updateProgress, false);
+            objXhr.addEventListener("load", transferComplete, false);
+
+            var dosyaYolu = $scope.gecerliDosyaYolu.split('/').join('.-123-.');
+            objXhr.open("POST", "/api/FileManagerAPI/DosyaYukle?dosyaYolu=" + dosyaYolu);
+            objXhr.send(datas);
+            objXhr.send(dosyaYolu);
+            
+        }
+        function updateProgress(e) {
+            if (e.lengthComputable) {
+                //document.getElementById('pro').setAttribute('value', e.loaded);
+                //document.getElementById('pro').setAttribute('max', e.total);
+                document.getElementById('den').style.maxWidth = e.total + '%';
+                document.getElementById('den').style.width = (e.loaded / e.total)*100 + '%';
+            }
+        }
+        function transferComplete(e) {
+            document.getElementById('den').innerHTML = "<strong>Tamamlandı<strong>";
+            $http({
+                method: 'GET', url: '/api/FileManagerAPI/AltDizin/' + $scope.gecerliDosyaYolu.split('/').join('.-123-.')
+            }).success(function (data, status, headers, config) {
+                $scope.dosyalar = data;
+            }).error(function (data, status, headers, config) {
+            })
+            //alert("Files uploaded successfully.");
+            //document.getElementById('pro').setAttribute('value', 0);
+            //document.getElementById('den').style.width = '0%';
+        }
+        //DOSYA UPLOAD BİTİŞ
+        $scope.BilgiGetir = function (dosyaYolu) {
+            $scope.dosyaBilgiGorunum = !$scope.dosyaBilgiGorunum;
+            $http({
+                method: 'POST',
+                url: '/api/FileManagerAPI/DosyaBilgi',
+                contentType: 'application/json',
+                data: { dosyaYolu: dosyaYolu },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                }
+            }).success(function (data, status, headers, config) {
+                $scope.dosyaBilgi = data[0];
+                if (angular.equals(data[0].DosyaOzellikleri.Yukseklik, null))
+                    $scope.dosyaBilgi.DosyaOzellikleri.Yukseklik = 0;
+
+                if (angular.equals(data[0].DosyaOzellikleri.Genislik, null))
+                    $scope.dosyaBilgi.DosyaOzellikleri.Genislik = 0;
+
+                if (angular.equals(data[0].DosyaOzellikleri.Boyut, null))
+                    $scope.dosyaBilgi.DosyaOzellikleri.Boyut = 0;
+
+                $scope.dosyaBilgi.FizikselYol = "http://www.csharpturk.net"+ data[0].DosyaYolu.substring(1,data[0].DosyaYolu.length);
+
+            }).error(function (data, status, headers, config) {
+                alert('Dosyalar alınamadı!');
+            })
+        }
+        //DOSYA TAŞIMA BAŞLANGIÇ
+        $scope.tasimaCheckbox = [];
+        $scope.tasinacakDosyalar = [];
+        $scope.DosyaTasiGorunum = function () {
+            $scope.dosyaTasimaGorunum = !$scope.dosyaTasimaGorunum;
+            if($scope.dosyaTasimaGorunum){
+                for (var i = 0; i < $scope.dosyalar.length; i++) {
+                    $scope.tasimaCheckbox[i] = false;
+                }
+            }
+        }
+        $scope.TasinacakDosyalariSec = function () {
+            $scope.tasinacakDosyalar = [];
+            for (var i = 0; i < $scope.dosyalar.length; i++) {
+                if ($scope.tasimaCheckbox[i]) $scope.tasinacakDosyalar.push($scope.dosyalar[i]);
+
+            };
+            if ($scope.tasinacakDosyalar.length == 0) return;
+            $scope.dosyaTasimaModalGorunum = !$scope.dosyaTasimaModalGorunum;
+            $scope.dosyaTasimaDizin = [];
+            $scope.gecerliTasimaYolu = {};
+            $http({
+                method: 'GET', url: '/api/FileManagerAPI/KullaniciAnaDizin/' + $scope.userName,
+            }).success(function (data, status, headers, config) {
+                $scope.dosyaTasimaDizin = [];
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].DosyaTuru == 'dir') { //KONTROL1 = DOSYA MI ? DOSYA DEGILSE DAHIL ETME
+                        $scope.dosyaTasimaDizin.push(data[i]);
+                    }
+                }
+
+                $scope.gecerliTasimaYolu = "~/Files/Uploads/" + $scope.userName;
+
+            }).error(function (data, status, headers, config) {
+
+            });
+        }
+        $scope.DosyaTasimaDosyaClick = function (dosyaYolu) {
+            $http({
+                method: 'GET', url: '/api/FileManagerAPI/AltDizin/' + dosyaYolu.split('/').join('.-123-.')
+            }).success(function (data, status, headers, config) {
+                $scope.gecerliTasimaYolu = dosyaYolu;
+                $scope.dosyaTasimaDizin = [];
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].DosyaTuru == 'dir')
+                        $scope.dosyaTasimaDizin.push(data[i]);
+                }
+            }).error(function (data, status, headers, config) {
+            })
+        }
+        $scope.DosyaTasimaGeri = function () {
+            $scope.fxTasimaYolu = $scope.gecerliTasimaYolu;
+            if (angular.equals($scope.fxTasimaYolu, '~/Files/Uploads/' + $scope.userName)) {
+                alert('Erişim Engellendi!');
+                return;
+            };
+            $scope.fxTasimaYolu = $scope.fxTasimaYolu.substring(0, $scope.fxTasimaYolu.lastIndexOf('/'));
+            $http({
+                method: 'GET', url: '/api/FileManagerAPI/Geri',
+                params: {
+                    dosyaYolu: $scope.fxTasimaYolu.split('/').join('.-123-.')
+                }
+            }).success(function (data, status, headers, config) {
+                $scope.dosyaTasimaDizin = [];
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].DosyaTuru == 'dir')
+                        $scope.dosyaTasimaDizin.push(data[i]);
+                }
+                $scope.gecerliTasimaYolu = $scope.fxTasimaYolu;
+            }).error(function (data, status, headers, config) {
+            })
+
+        }
+        $scope.DosyaTasi = function () {
+            for (var i = 0; i < $scope.tasinacakDosyalar.length; i++) {
+                $http({
+                    method: 'GET',
+                    url: '/api/FileManagerAPI/DosyaTasi/',
+                    params:{
+                        eskiYol: $scope.tasinacakDosyalar[i].DosyaYolu,
+                        yeniYol :$scope.gecerliTasimaYolu,
+                    },
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                }).success(function (data,status,headers,config) {
+
+                }).error(function (data, status, headers, config) {
+
+                })
+            }
+        }
+        //DOSYA TAŞIMA BİTİŞ
+    }]);
+
+    module.directive('modal', function () {
+        return {
+            template: '<div class="modal fade">' +
+                '<div class="modal-dialog">' +
+                  '<div class="modal-content">' +
+                    '<div class="modal-header">' +
+                      '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                      '<h4 class="modal-title">{{ title }}</h4>' +
+                    '</div>' +
+                    '<div class="modal-body" ng-transclude></div>' +
+                  '</div>' +
+                '</div>' +
+              '</div>',
+            restrict: 'E',
+            transclude: true,
+            replace: true,
+            scope: true,
+            link: function postLink(scope, element, attrs) {
+                scope.title = attrs.title;
+
+                scope.$watch(attrs.visible, function (value) {
+                    if (value == true)
+                        $(element).modal('show');
+                    else
+                        $(element).modal('hide');
+                });
+
+                $(element).on('shown.bs.modal', function () {
+                    scope.$apply(function () {
+                        scope.$parent[attrs.visible] = true;
+                    });
+                });
+
+                $(element).on('hidden.bs.modal', function () {
+                    scope.$apply(function () {
+                        scope.$parent[attrs.visible] = false;
+                    });
+                });
+            }
+        };
+    });
+    module.directive('ngConfirmClick', [function () {
+        return {
+            link: function (scope, element, attr) {
+                var msg = attr.ngConfirmClick || "Are you sure?";
+                var clickAction = attr.confirmedClick;
+                element.bind('click', function (event) {
+                    if (window.confirm(msg)) {
+                        scope.$eval(clickAction)
+                    }
+                });
+            }
+        };
+    }]);
+
+
+</script>
+
+<div class="container">
+    <div class="row sifirla" id="dosyaYoneticisi" ng-controller="dosyaYoneticisiController">
+        <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+                <div class="row sifirla">
+                    <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+                        <h2>DosyaYoneticisi</h2>
+                        <button class="pull-left btn-sm btn-success" ng-click="yeniKlasorEkleme()">
+                            <span class="glyphicon glyphicon-plus"></span> <span>Klasör Ekle</span> &nbsp;
+                        </button>
+
+                        <div class="form-group">
+                            <input class=" m-l-1 pull-left btn-sm btn-default btn-file" type="file" id="file" name="file" multiple
+                                   onchange="angular.element(this).scope().getFileDetails(this)" />
+                            <input class="pull-left btn-sm btn-primary" type="button" ng-click="uploadFiles()" value="Yükle" />
+                            <button class="pull-left btn-sm btn-info" ng-click="DosyaTasiGorunum()">
+                                <span class="glyphicon glyphicon-move"></span> <span>Dosya Taşıma</span> &nbsp;
+                            </button>
+
+                        </div>
+                        <br />
+                        <br />
+                        <div ng-hide="progressBarGorunum" style="width:100%" class="progress">
+                            <div id="den" class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+            <div class="row sifirla">
+                <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+                    <table class="table table-condensed ">
+                        <thead>
+                            <tr>
+                                <th ng-hide="dosyaTasimaGorunum">Seç</th>
+                                <th>
+                                    Dosya Resim
+                                </th>
+                                <th>Dosya Adı</th>
+                                <th>Dosya Türü</th>
+                                <th>Boyutu</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="dosya in dosyalar">
+                                <td ng-hide="dosyaTasimaGorunum"><input ng-model="tasimaCheckbox[$index]" type="checkbox" /></td>
+                                <td>
+                                    <img class="wdthgt40 centerItem" src="{{dosya.ResimURL}}" />
+                                </td>
+                                <td>
+                                    <a style="cursor:pointer" ng-click="DosyaClick(dosya.DosyaYolu,dosya.DosyaTuru)"> {{dosya.DosyaAdi}} </a>
+                                </td>
+                                <td>  {{dosya.DosyaTuru}}</td>
+                                <td> {{dosya.DosyaOzellikleri.Boyut / 1024 | number : 2}} KB </td>
+                                <td>
+                                    <button ng-click="BilgiGetir(dosya.DosyaYolu)" class="btn btn-info">
+                                        <span class="glyphicon glyphicon-info-sign"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-success">
+                                        <span class="glyphicon glyphicon-download-alt"></span>
+                                    </button>
+                                </td>
+
+                                <td>
+                                    <button ng-click="dosyaSec(dosya.DosyaYolu,dosya.DosyaTuru,dosya.DosyaAdi)" class="btn btn-warning">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" ng-confirm-click="Silmek istediğinize emin misiniz?"
+                                            confirmed-click="Sil(dosya.DosyaYolu,dosya.DosyaAdi)">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </td>
+
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                    <div>
+                        <div>
+                            <button ng-hide="dosyaTasimaGorunum" class="btn btn-primary" ng-click="TasinacakDosyalariSec()">
+                                <span class="glyphicon glyphicon-move"></span> <span>Taşı</span>
+                            </button>
+                            <span ng-hide="dosyaTasimaGorunum">&nbsp; </span>
+                            <button class="btn btn-primary" ng-click="Geri()">
+                                <span class="glyphicon glyphicon-chevron-left"></span> <span>Geri</span>
+                            </button>
+                        </div>
+
+
+                        <modal title="Dosya/Klasör Bilgi" visible="dosyaBilgiGorunum">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="dosyaAdi">Adı </label>
+                                    <p class="">
+                                        &nbsp;&nbsp;&nbsp;{{dosyaBilgi.DosyaAdi}}
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dosyaAdi">Fiziksel Yolu </label>
+                                    <p class="">
+                                        &nbsp;&nbsp;&nbsp;{{dosyaBilgi.FizikselYol}}
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dosyaAdi">Türü </label>
+                                    <p class="">
+                                        &nbsp;&nbsp;&nbsp;{{dosyaBilgi.DosyaTuru}}
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dosyaAdi">Yükseklik </label>
+                                    <p class="">
+                                        &nbsp;&nbsp;&nbsp;{{dosyaBilgi.DosyaOzellikleri.Yukseklik}}
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dosyaAdi">Genişlik </label>
+                                    <p class="">
+                                        &nbsp;&nbsp;&nbsp;{{dosyaBilgi.DosyaOzellikleri.Genislik}}
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dosyaAdi">Boyut </label>
+                                    <p class="">
+                                        &nbsp;&nbsp;&nbsp;{{dosyaBilgi.DosyaOzellikleri.Boyut}}
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dosyaAdi">Oluşturulma Tarihi </label>
+                                    <p class="">
+                                        &nbsp;&nbsp;&nbsp;{{dosyaBilgi.DosyaOzellikleri.OlusturulmaTarihi | date : 'dd.MM.yyyy HH:mm'}}
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dosyaAdi">Değiştirilme Tarihi </label>
+                                    <p class="">
+                                        &nbsp;&nbsp;&nbsp;{{dosyaBilgi.DosyaOzellikleri.DegistirilmeTarihi | date : 'dd.MM.yyyy HH:mm'}}
+                                    </p>
+                                </div>
+
+                            </form>
+                        </modal>
+
+                        <modal title="Klasör Seçin" visible="dosyaTasimaModalGorunum">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Klasörler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="dosya in dosyaTasimaDizin">
+                                        <td>
+                                            &#8195;<a style="cursor:pointer" 
+                                                      ng-click="DosyaTasimaDosyaClick(dosya.DosyaYolu)"> {{dosya.DosyaAdi}} </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                            <button class="btn-sm btn-primary" ng-click="DosyaTasimaGeri()"> 
+                                <span class="glyphicon glyphicon-arrow-left"></span> <span>Geri</span> 
+                            </button>
+                            <br />
+                            <br />
+                            <button type="submit" ng-click="DosyaTasi()" class="btn btn-default">Bulunulan Dizini Seç &amp; Taşı</button>
+                        </modal>
+
+
+                        <modal title="Yeniden Adlandır" visible="yenidenAdlandirmaGorunum">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="yenidenAdlandirma">Dosya/Klasör Adi</label>
+                                    <input ng-model="yenidenAdlandirma.DosyaAdi" type="text" class="form-control" id="yenidenAdlandirma" />
+                                </div>
+                                <button type="submit" ng-click="YenidenAdlandir(yenidenAdlandirma.DosyaYolu,yenidenAdlandirma.DosyaAdi)" class="btn btn-default">Onayla</button>
+                            </form>
+                        </modal>
+
+                        <modal title="Yeni Klasör Ekle" visible="yeniKlasorGorunum">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="yeniKlasor">Yeni Klasör Adi</label>
+                                    <input ng-model="yeniKlasor" type="text" class="form-control" id="yeniKlasor" />
+                                </div>
+                                <button type="submit" ng-click="KlasorEkle(yeniKlasor)" class="btn btn-default">Onayla</button>
+                            </form>
+                        </modal>
+                    </div>
+        </div>
+
+
+    </div>
+
+</div>
+

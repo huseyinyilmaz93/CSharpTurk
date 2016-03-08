@@ -1,0 +1,388 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/ico" href="~/Content/favicon.ico">
+    <title>@ViewBag.Title</title>
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/layout.css" rel="stylesheet" />
+    <link href="~/Content/css/footer.css" rel="stylesheet" />
+
+    <link href="~/Content/css/textAngular.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    <script src="~/Scripts/textAngular-rangy.min.js"></script>
+    <script src="~/Scripts/textAngular-sanitize.js"></script>
+    <script src="~/Scripts/textAngular.min.js"></script>
+    <script>
+        var module = angular.module('angular', ['textAngular', 'ngSanitize']);
+
+        module.controller('Controller', function ($scope, $http) {
+            //do something
+            //$scope.gecerliKullanici = {};
+            //$scope.tumHatalar = {}
+            //$http({ method: 'GET', url: '/api/HesapAPI/KullaniciGetir/' + $scope.yazarId })
+            //    .success(function (data,status,headers,config) {
+            //        if (status == 200) {
+            //            $scope.gecerliKullanici = data;
+            //        }
+            //    }).error(function (data, status, headers, config) {
+            //        if (status == 405) {
+            //            $scope.tumHatalar = data.ModelState;
+            //        }
+            //    })
+        });
+
+        module.controller('HataBildirController', ['$scope', '$http', function ($scope, $http) {
+            $scope.hataBildirTumHatalar = {}
+            $scope.submitHata = function () {
+                $http({
+                    method: 'POST',
+                    url: '/api/HataBildirAPI/HataKaydet',
+                    contentType: 'application/json',
+                    data: $scope.yeniHata,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function (obj) {
+                        var str = [];
+                        for (var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        return str.join("&");
+                    }
+                }).success(function (data, status, headers, config) {
+                    alert('Bildiriminiz için teşekkürler en yakın zamanda ilgilenilecektir.');
+                    $scope.yeniHata.email = "";
+                    $scope.yeniHata.hataMesaji = "";
+                    $scope.hataBildirTumHatalar = "";
+                }).error(function (data, status, headers, config) {
+                    $scope.hataBildirTumHatalar = data.ModelState;
+                })
+            }
+        }]);
+        
+        module.controller('GirisYapController', ['$scope', '$http', function ($scope, $http) {
+            $scope.kullanici = {};
+            $scope.oturumAc = {};
+            $scope.tumHatalar = {};
+            $scope.submitForm = function () {
+                $http({
+                    method: 'POST',
+                    url: '/api/HesapAPI/GirisYap',
+                    contentType: 'application/json',
+                    data: $scope.kullanici,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function (obj) {
+                        var str = [];
+                        for (var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        return str.join("&");
+                    }
+                }).success(function (data, status, headers, config) {
+                    $http({
+                        method: 'POST',
+                        url: '/Hesap/Giris',
+                        contentType: 'application/json',
+                        data: data,
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        transformRequest: function (obj) {
+                            var str = [];
+                            for (var p in obj)
+                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                            return str.join("&");
+                        }
+                    }).success(function (data, status, headers, config) {
+                        if (status == 200) {
+                            if (data == "Admin") {
+                                window.location = "/Admin/Index";
+                            } else if (data == "Yazar") {
+                                window.location = "/Yazar/Index";
+                            } else if (data == "OturumHatasi") {
+                                alert('Oturum açarken hata oluştu. Tekrar deneyin.');
+                                window.location.reload();
+                            } else {
+                                window.location = "/Makale/Makaleler";
+                            }
+                        }
+                    }).error(function (data, status, headers, config) {
+                        //window.location.reload();
+                        $scope.tumHatalar = data.ModelState;
+                    })
+                }).error(function (data, status, headers, config) {
+                    //window.location.reload();
+                    $scope.tumHatalar = data.ModelState;
+                })
+            }
+            $scope.sifremiUnuttumGorunum = false;
+
+            $scope.sifremiUnuttumClick = function () {
+                $scope.sifremiUnuttumGorunum = !$scope.sifremiUnuttumGorunum;
+            };
+
+            $scope.MailKontrol = function () {
+                $http({
+                    method: 'POST',
+                    url: '/api/HesapAPI/MailKontrol',
+                    contentType: 'application/json',
+                    data: $scope.mail,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function (obj) {
+                        var str = [];
+                        for (var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        return str.join("&");
+                    }
+                })
+                .success(function (data, status, headers, config) {
+                    $scope.hataGorunum = true;
+                    alert('Şifre değişim isteğiniz alınmıştır. E postanızı kontrol edin!');
+                    window.location = "/Anasayfa";
+                }).error(function (data, status, headers, config) {
+                    $scope.hataGorunum = false;
+                    $scope.mesaj = data.Message;
+                })
+            }
+
+        }]);
+
+        module.controller('KullaniciController', ['$scope', '$http', function ($scope, $http) {
+            $scope.gecerliKullanici = {};
+            $scope.tumHatalar = {}
+            $http({ method: 'GET', url: '/api/HesapAPI/' + $scope.kullaniciId }).success(function (data, status, headers, config) {
+                if (status == 200) {
+                    $scope.gecerliKullanici = data;
+                }
+            }).error(function (data, status, headers, config) {
+                if (status == 405) {
+                    $scope.tumHatalar = data.ModelState;
+                }
+            })
+        }]);
+
+        module.controller('AramaController', ['$scope', '$http', function ($scope, $http) {
+            $scope.hataGorunmezlik = false;
+            angular.element(document).ready(function () {
+                $scope.hataGorunmezlik = false;
+            })
+            $scope.Ara = function () {
+                if ($scope.aramaFiltresi.length < 3)
+                    $scope.hataGorunmezlik = true;
+                else {
+                    $scope.hataGorunmezlik = false;
+                    window.location = '/Site/AramaSonucu/' + $scope.aramaFiltresi;
+                }
+            }
+        }]);
+
+        module.controller('MakaleTipController', ['$scope', '$http', function ($scope, $http) {
+            $scope.makaleTipleri = {};
+            $http({ method: 'GET', url: '/api/MakaleAPI/MakaleTipleri' }).success(function (data,status,headers,config) {
+                $scope.makaleTipleri = data;
+            })
+        }])
+
+        module.controller('NavbarController', ['$scope', '$http', function ($scope, $http) {
+            $http({ method: 'GET', url: '/api/StatikSayfaAPI/StatikSayfalar' }).success(function (data, status, headers, config) {
+                $scope.sayfalar = data;
+            });
+        }]);
+
+    </script>
+</head>
+<body id="angular" ng-app="angular" ng-init="kullaniciId='@ViewBag.kullaniciId'">
+    <br />
+    <div class="container"></div>
+    <div class="container">
+        <div class="row sifirla">
+            <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12">
+                <nav class="navbar navbar-default navbar-customize">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand navbar-brand-customize" href="~/Anasayfa">CSharpTürk</a>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-nav-customize">
+                                <!--<li><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
+                                <!--<li><a href="#">Link</a></li>-->
+                            </ul>
+                            <ul class="nav navbar-nav navbar-nav-customize navbar-right" ng-controller="NavbarController">
+                                <li><a href="~/Anasayfa"><div><div style="text-align: center; font-size: 20px" class="center-block glyphicon glyphicon-home"> </div><div style="text-align:center"> Anasayfa </div></div></a></li>
+                                <li class="dropdown" ng-controller="MakaleTipController">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div><div style="text-align:center;font-size:20px" class="center-block glyphicon glyphicon-align-center"> </div><div style="text-align:center"> Makaleler <span class="caret"></span> </div></div></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/Makale/Makaleler"><span class="glyphicon glyphicon-align-center"></span>   Tüm Makaleler</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li ng-repeat="makaleTipi in makaleTipleri"><a href="~/Makale/MakaleTip/{{makaleTipi.MakaleTipId}}">{{makaleTipi.MakaleTipAdi}}</a></li>
+                                    </ul>
+                                </li>
+                                <li ng-repeat="sayfa in sayfalar">
+                                    <a href="~/Site/StatikSayfa/{{sayfa.SayfaId}}"><div><div style="text-align: center; font-size: 20px" class="center-block {{sayfa.GlyphiconClass}}"> </div><div style="text-align:center"> {{sayfa.SayfaAdi}} </div></div></a>
+                                </li>
+                                <li><a href="~/Haber/Haberler"><div><div style="text-align: center; font-size: 20px" class="center-block glyphicon glyphicon-th"> </div><div style="text-align:center"> Haberler </div></div></a></li>
+                                <li><a href="~/Etkinlik/Etkinlikler"><div><div style="text-align: center; font-size: 20px" class="center-block glyphicon glyphicon-signal"> </div><div style="text-align:center"> Etkinlikler </div></div></a></li>
+                                <li><a href="~/IsIlani/Ilanlar"><div><div style="text-align: center; font-size: 20px" class="center-block glyphicon glyphicon-flash"> </div><div style="text-align:center"> İş İlanları </div></div></a></li>
+                                <li><a href="~/Site/Yazarlar"><div><div style="text-align: center; font-size: 20px" class="center-block glyphicon glyphicon-user"> </div><div style="text-align:center"> Yazarlar </div></div></a></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li class="dropdown" style="text-align:center" ng-controller="AramaController">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:32px" class="glyphicon glyphicon-search"></span> <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#" style="cursor:default;">
+                                                <div ng-show="hataGorunmezlik" style="color:red">Arama yapabilmek için en az 3 karakter girilmelidir.</div>
+                                                <form class="navbar-form navbar-right" role="search" ng-submit="Ara()">
+                                                    <div class="input-group">
+                                                        <input onclick="return false" ng-model="aramaFiltresi" type="text" style="width:150px" name="srch-term" id="srch-term" class="form-control" placeholder="Site içi arama ...">
+                                                        <div class="input-group-btn">
+                                                            <input value="Ara" type="submit" class="btn btn-default" />
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown" style="text-align:center">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:32px" class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" ng-controller="GirisYapController">
+                                        <li>
+                                            <a href="#" style="cursor:default;">
+                                                @if (!User.Identity.IsAuthenticated)
+                                                {
+                                                    <form class="navbar-form navbar-right" role="search" ng-submit="submitForm()">
+                                                        <div>
+                                                            <ul ng-repeat="alan in tumHatalar">
+                                                                <li style="color:red" ng-repeat="hata in alan">{{hata}}</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon" id="basic-addon1">@@</span>
+                                                            <input name="kullaniciAdi" ng-model="kullanici.UserName" onclick="return false" style="width:150px" type="text" class="form-control" placeholder="Kullanıcı Adı" aria-describedby="basic-addon1">
+                                                        </div><br />
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon" id="basic-addon1">@@</span>
+                                                            <input name="sifre" ng-model="kullanici.Password" onclick="return false" style="width:150px" type="password" class="form-control" placeholder="Şifre" aria-describedby="basic-addon1">
+                                                        </div>  <br />
+                                                        <div style="margin-top:5px" class="input-group">
+                                                            <input type="submit" value="Giriş" class=" center btn btn-default" />
+                                                            <input ng-hide="true" type="checkbox" name="beniHatirla" ng-model="kullanici.RememberMe" aria-describedby="basic-addon1">
+                                                            <span style="cursor:pointer" ng-click="sifremiUnuttumClick()">&nbsp; Şifremi Unuttum</span>
+                                                        </div>
+                                                    </form>
+
+                                                }
+                                                else
+                                                {
+                                                    <p>
+                                                        <!-- User image -->
+                                                        <div class="user-header" ng-controller="KullaniciController">
+                                                            <img style="width:160px;height:160px" src="{{gecerliKullanici.ResimURL}}" class="img-responsive img-bordered img-circle" alt="User Image">
+                                                        </div>
+                                                        <!-- Menu Body -->
+                                                        <div class="user-body" ng-controller="KullaniciController">
+                                                            <div class="col-xs-12 text-center">
+                                                                @if (User.IsInRole("Admin"))
+                                                                {
+                                                                    <a href="~/Admin/Index">{{gecerliKullanici.UserName}} , HOŞGELDİNİZ <br /> </a>
+                                                                    <a href="~/Admin/Index">Admin Kullanıcı Sayfası </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Yazar/Index">{{gecerliKullanici.UserName}} , HOŞGELDİNİZ <br /> </a>
+                                                                    <a href="~/Yazar/Index">Yazar Kullanıcı Sayfası</a>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <!-- Menu Footer-->
+                                                        <div style="margin-top:45px" class="user-footer">
+                                                            <div class="pull-left">
+                                                                <a href="~/Hesap/SifreDegistir" class="btn btn-default btn-flat">Şifre Değiştir </a>
+                                                            </div>
+                                                            <div class="pull-right">
+                                                                <a href="~/Hesap/CikisYap" class="btn btn-default btn-flat">Çıkış Yap</a>
+                                                            </div>
+                                                        </div>
+                                                    </p>
+                                                }
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                    <div class="endofnav"></div>
+                    <div class="contain"></div>
+                </nav>
+            </div>
+        </div>
+        <div class="row sifirla">
+                @RenderBody()
+        </div>
+    </div>
+    <div ng-controller="SifremiUnuttumController">
+        <modal style="z-index:100" title="Şifremi Unuttum" visible="sifremiUnuttumGorunum">
+            <form role="form">
+                <div class="form-group">
+                    <label for="E-Mail">E-Mail : </label>
+                    <input ng-model="Email" type="text" class="form-control" id="Email" />
+                </div>
+                <button type="submit" ng-click="()" class="btn btn-default">Onayla</button>
+            </form>
+        </modal>
+    </div>
+    <div class="clearfix"></div> <!--END OF CONTENT || FOOTER BEGINS -->
+    <footer class="footer-distributed">
+            <div class="footer-left">
+                <h3>CSharp<span>TÜRK</span></h3>
+                <p class="footer-links">
+                    <a href="~/Anasayfa">Anasayfa</a>
+                    ·
+                    <a href="~/Makale/Makaleler">Makaleler</a>
+                    ·
+                    <a href="~/Site/Yazarlar">Yazarlar</a>
+                    ·
+                    <a href="~/Haber/Haberler">Haberler</a>
+                    ·
+                    <a href="~/Etkinlik/Etkinlikler">Etkinlikler</a>
+                    ·
+                    <a href="~/IsIlani/Ilanlar">İş İlanları</a>
+                </p>
+                <p class="footer-company-name">CSharpTURK &copy; 2016</p>
+                <div class="footer-icons">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <p>Hata Bildirin</p>
+                <form name="hataBildir" ng-submit="submitHata()" ng-controller="HataBildirController">
+                    <ul ng-repeat="alan in hataBildirTumHatalar">
+                        <li style="color:red" ng-repeat="hata in alan">{{hata}}</li> <!--Bir alanda birde çok hata olabilir!!-->
+                    </ul>
+                    <input ng-model="yeniHata.email" type="text" name="email" placeholder="Email" />
+                    <textarea ng-model="yeniHata.hataMesaji" name="message" placeholder="Mesaj"></textarea>
+                    <input type="submit" value="Gönder" />
+                </form>
+            </div>
+     </footer>
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

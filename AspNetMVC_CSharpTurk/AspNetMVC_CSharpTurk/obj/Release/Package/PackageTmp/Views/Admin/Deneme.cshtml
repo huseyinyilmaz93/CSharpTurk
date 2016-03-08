@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+
+    <title>Deneme</title>
+    <script>
+        var app = angular.module('app', ["angucomplete"]);
+    </script>
+    <link href="~/angucomplete.css" rel="stylesheet" />
+    <script src="~/angucomplete.js"></script>
+</head>
+<body>
+    <div ng-app="app">
+        <angucomplete id="ex1"
+                      placeholder="Search countries"
+                      pause="100"
+                      selectedobject="selectedCountry"
+                      localdata="countries"
+                      searchfields="name"
+                      titlefield="name"
+                      minlength="1"
+                      inputclass="form-control form-control-small" />
+    </div>
+</body>
+</html>

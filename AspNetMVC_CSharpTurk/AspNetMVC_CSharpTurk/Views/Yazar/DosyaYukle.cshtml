@@ -1,0 +1,25 @@
+﻿
+@{
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        ViewBag.Title = "Dosya Yükle | Admin Panel;";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "Dosya Yükle | CSharpTurk;";
+    }
+}
+<!---
+<script >
+    for (var i = 0; i < 100; i++) {
+        document.styleSheets[i].disabled = true;
+    }
+</script>
+    -->
+<div style="margin:0px;padding:0px;overflow:hidden;">
+    <iframe src="~/Yazar/elFinder" frameborder="0" style="overflow:hidden;height:620px;width:100%"></iframe>
+</div>
+<br />
+

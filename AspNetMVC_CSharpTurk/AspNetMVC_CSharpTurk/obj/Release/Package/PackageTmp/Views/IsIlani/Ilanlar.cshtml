@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "İş İlanları | CSharpTürk";
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        ViewBag.Title = "İş İlanları | Admin Panel";
+    }
+
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "İş İlanları | CSharpTurk";
+    }
+
+}
+
+<script src="~/Scripts/angular.min.js"></script>
+<script>
+    var module = angular.module('angular');
+    module.controller('tumIlanlarController', ['$scope', '$http', '$sce', function ($scope, $http) {
+        $scope.currentPage = 0;
+        $scope.pageSize = 10;
+        $scope.numberOfPages = function () {
+            return Math.ceil($scope.ilanlar.length / $scope.pageSize);
+        }
+        $http({ method: 'GET', url: '/api/IsIlaniAPI/TumIlanlar' }).success(function (data, status, headers, config) {
+            $scope.ilanlar = data;
+        }).error(function (data, status, headers, config) {
+            alert('Bilgileri alırken bir hata oluştu. Sayfayı yenileyerek tekrar deneyin!');
+        });
+    }]);
+
+    module.filter('startFrom', function () {
+        return function (input, start) {
+            start = +start; //parse to int
+            return input.slice(start);
+        }
+    });
+    module.filter('htmlToPlaintext', function () {
+        return function (text) {
+            return angular.element(text).text();
+        };
+    }
+  );
+
+
+
+</script>
+
+<div class="container">
+    <div class="row sifirla">
+        <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+            <div class="table-responsive">
+                <table>
+                    <tbody id="ang_ilanlar" ng-controller="tumIlanlarController">
+                        <tr class="yazarTableMargin" ng-repeat="ilan in ilanlar | startFrom:currentPage*pageSize | limitTo:pageSize">
+                            <td valign="middle" class="centerItem">
+                                <img class="resim160" src="{{ilan.ResimURL}}" /> <br />
+                            </td>
+                            <td> &nbsp;&nbsp;</td>
+                            <td valign="middle" colspan="4">
+                                <div>
+                                    <blockquote class="blockquoteBorder0">
+                                        <header><a class="colorIsIlani" href="~/IlanDetay/{{ilan.IlanUrl}}">{{ilan.IlanBaslik}}</a> </header>
+                                        <small><!--18:13 24 Nov' 11-->{{ilan.IlanTarih | date:'HH:mm dd-MM yy'}} </small>
+                                        <p>{{ilan.IlanOzet | htmlToPlaintext}}</p>
+                                    </blockquote>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="6"></td>
+                            <td></td>
+                            <td class="centerItem">
+                                <button class="btn btn-md btn-primary" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                                    <span class="glyphicon glyphicon-th-large glyphicon glyphicon-chevron-left
+"></span> Önceki
+                                </button>
+                                <strong>{{currentPage+1}}/{{numberOfPages()}}</strong>
+                                <button class="btn btn-md btn-primary" ng-disabled="currentPage >=  numberOfPages()-1 " ng-click="currentPage=currentPage+1">
+                                    Sonraki <span class="glyphicon glyphicon-th-large glyphicon glyphicon-chevron-right
+"></span>
+                                </button>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

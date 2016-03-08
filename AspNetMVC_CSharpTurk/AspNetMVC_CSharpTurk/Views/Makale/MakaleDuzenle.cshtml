@@ -1,0 +1,267 @@
+﻿@model AspNetMVC_CSharpTurk.Models.DatabaseObjectModels.Makale
+
+@{
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        ViewBag.Title = "Makale Düzenle | Admin Panel";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "Makale Düzenle | CSharpTurk";
+    }
+}
+<script>
+    var module = angular.module('angular');
+    module.controller('makaleDuzenleController',['$scope','$http',function ($scope, $http, $location) {
+        $scope.eskiMakale = {};
+        $scope.yeniMakale = {};
+        $scope.tumHatalar = {};
+        $scope.secilenEtiketler = [];
+        $scope.secilenEtId = [];
+        $scope.etiketler = [];
+        $scope.makaleTipleri = {};
+
+        $http({ method: 'GET', url: '/api/MakaleAPI/MakaleTipleri' }).success(function (data, status, headers, config) {
+            $scope.makaleTipleri = data;
+        })
+
+
+        angular.element(document).ready(function () {
+            $http({ method: 'GET', url: '/api/MakaleAPI/' + $scope.makaleId })
+                .success(function (data, status, headers, config) {
+                $scope.eskiMakale = data[0];
+                $scope.makaleTipi = $scope.eskiMakale.MakaleTip;
+                $scope.makaleBaslik = $scope.eskiMakale.MakaleBaslik;
+                $scope.makaleGovde = $scope.eskiMakale.MakaleGovde;
+                $scope.makaleOzet = $scope.eskiMakale.MakaleOzet;
+                if (status == 100) {
+                    alert('Makale bilgilerini değiştirmek için')
+                }
+                //Makale için seçilmiş etiketleri çeker
+                $http({ method: 'GET', url: '/api/EtiketAPI/GetMakaleEtiket/' + $scope.makaleId }).success(function (data, status, headers, config) {
+                    $scope.secilenEtiketler = data[0].Etiketler;
+
+                    //Tüm Etiketler çekilir
+                    $http({ method: 'GET', url: '/api/EtiketAPI/Etiketler' }).success(function (data, status, headers, config) {
+                        $scope.etiketler = data;
+                        //Tüm etiketlerden daha önce eklenenler çıkarılır.
+                        for (var i = 0; i < $scope.secilenEtiketler.length; i++) {
+                            for (var j = 0; j < $scope.etiketler.length ; j++) {
+                                if (angular.equals($scope.secilenEtiketler[i], $scope.etiketler[j]))
+                                    $scope.etiketler.splice(j, 1);
+                            }
+                        };
+
+
+                    }).error(function (data, status, headers, config) {
+
+                    });
+                    
+
+                }).error(function (data, status, headers, config) {
+
+                });
+
+
+            }).error(function (data, status, headers, config) {
+                alert('Bilgileri alırken bir hata oluştu !');
+
+            });
+        });
+
+        $scope.submitForm = function () {
+            $scope.yeniMakale.MakaleTipi = $scope.makaleTipi;
+            $scope.yeniMakale.MakaleBaslik = $scope.makaleBaslik;
+            $scope.yeniMakale.MakaleGovde = $scope.makaleGovde;
+            $scope.yeniMakale.MakaleOzet = $scope.makaleOzet;
+
+            for (var i = 0; i < $scope.secilenEtiketler.length; i++) {
+                $scope.secilenEtId.push($scope.secilenEtiketler[i].EtiketId);
+            };
+            $http({
+                method: 'PUT',
+                url: '/api/EtiketAPI/EtiketleriDuzenle/' + $scope.makaleId,
+                contentType: 'application/json',
+                params: {
+                    etiketIds: $scope.secilenEtId,
+                },
+                data: { etiketIds: $scope.secilenEtId },
+                isArray: true,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            }).success(function (data, status, headers, config) {
+                alert('Etiketler düzenlendi ...');
+            }).error(function (data, status, headers, config) {
+                alert('Etiketler düzenlenemedi.');
+            })
+
+            $http({
+                method: 'PUT',
+                url: '/api/MakaleAPI/' + $scope.makaleId + '/' + $scope.yazarId,
+                contentType: "application/json",
+                data: $scope.yeniMakale,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                }
+            })
+            .success(function (data, status, headers, config) {
+                  //işlem başarılı
+
+                  if (status == 200) {
+                      alert('Makale düzenlendi ...');
+                      window.location = "/Makale/Makaleler";
+                  } else if (status == 204) {
+                      alert('Makaleye ait veriler tarafınızdan değiştirilmediği için herhangi bir değişiklik gerçekleştirilmedi.')
+                  } else {
+                      alert('Bir hata meydana geldi anasayfaya yönlendiriliyorsunuz!');
+                      window.location = '/Home/Index';
+                  }
+
+              }).error(function (data, status, headers, config) {
+                  if (status == 400) {
+                      alert('Form bilgilerini kontrol edin.');
+                      $scope.tumHatalar = data.ModelState;
+                  } else if (status == 403) {
+                      alert('Bu işlemi yapmak için yetkiniz yok!');
+                      window.location = "/Hesap/CikisYap";
+                  } else if (status == 406) {
+                      alert('Makale bilgileri geçerli değil!');
+                  } else {
+                      alert('Bir hata meydana geldi! Anasayfaya yönlendiriliyorsunuz !');
+                      window.location = "/Home/Index";
+                  }
+              });
+
+            
+        };
+        $scope.EtiketEkle = function () {
+            if ($scope.secilen == null || $scope.secilen == "") return;
+            $scope.flag = true;
+            for (var i = 0; i < $scope.etiketler.length; i++) {
+                if (angular.equals($scope.etiketler[i].EtiketAdi,$scope.secilen))
+                {
+                    $scope.flag = false;
+                    break;
+                }
+            }
+            if ($scope.flag) return;
+            $scope.geciciEtiket = {};
+            for (var i = 0; i < $scope.etiketler.length; i++) {
+                if (angular.equals($scope.etiketler[i].EtiketAdi, $scope.secilen)) {
+                    $scope.geciciEtiket = $scope.etiketler[i];
+                    break;
+                };
+            };
+            $scope.secilenEtiketler.push($scope.geciciEtiket);
+            var index = $scope.etiketler.indexOf($scope.geciciEtiket);
+            $scope.etiketler.splice(index, 1);
+            $scope.secilen = "";
+        }
+
+        $scope.EtiketCikar = function (idx) {
+            $scope.etiketler.push($scope.secilenEtiketler[idx]);
+            $scope.secilenEtiketler.splice(idx, 1);
+        }
+
+    }]);
+
+</script>
+<h2>Makale Düzenleme</h2>
+<div class="row">
+    <div class="col-sm-11 col-lg-11 col-md-11 col-ls-11 col-xs-11">
+        <div id="ang_makaleDuzenle" ng-controller="makaleDuzenleController">
+            <form name="formMakaleDuzenle" ng-submit="submitForm()" ng-init="makaleId = @ViewBag.id;yazarId='@ViewBag.userId'">
+                <ul ng-repeat="alan in tumHatalar">
+                    <li style="color:red" ng-repeat="hata in alan">{{hata}}</li> <!--Bir alanda birde çok hata olabilir!!-->
+                    <!--alan : MakaleBaşlığı, MakaleGovde, MakaleOzet-->
+                </ul>
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.HiddenFor(model => model.MakaleId)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MakaleTipi, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select ng-model="makaleTipi">
+                                <option ng-repeat="makaleTipi in makaleTipleri">{{makaleTipi.MakaleTipAdi}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MakaleBaslik, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="makaleBaslik" ng-model="makaleBaslik">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MakaleGovde, new { @class = "control-label col-md-2" })
+                        <div>
+                            <div class="col-sm-10 col-md-10">
+                                <div text-angular ng-model="makaleGovde" name="demo-editor" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+                            </div>
+                            <span ng-show="errorMakaleGovde">{{errorMakaleGovde}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MakaleOzet, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <textarea rows="5" name="makaleOzet" class="form-control" ng-model="makaleOzet"> {{makaleOzet}} </textarea>
+                            <span ng-show="errorMakaleOzet">{{errorMakaleOzet}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Etiket Seçin", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input class="text-blue" list="etiketSecim" ng-model="secilen" name="etiketSecim">
+                            <datalist id="etiketSecim">
+                                <option ng-repeat="etiket in etiketler">{{etiket.EtiketAdi}}</option>
+                            </datalist>
+                            <input type="button" class="btn-sm btn-primary" value="Ekle" ng-click="EtiketEkle()" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.Label("Seçilen Etiketler", new { @class = "control-label col-md-2" })
+                        <div style="margin-left:-5px" class="col-md-10">
+                            <span style="background-color: #e7e7e7; border-radius: 3px; border: 1px solid red; margin-left:5px;" class="input-group pull-left" 
+                                  ng-repeat="etiket in secilenEtiketler">
+                                &nbsp;
+
+                                <small style="color: #454141" class=" input-group-sm">
+                                    {{etiket.EtiketAdi}}
+                                </small>
+                                &nbsp;
+                                <button ng-click="EtiketCikar($index)" class="input-group-sm btn-sm btn-danger pull-right "><span class="glyphicon glyphicon-remove"></span></button>
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Düzenle" class="form-control btn btn-warning" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <a class="btn btn-primary" href="@ViewBag.previousUrl">
+                <span class="glyphicon glyphicon-chevron-left glyphicon-th-large"></span>
+                Geri Dön
+            </a>
+        </div>
+    </div>
+</div>
+<br />

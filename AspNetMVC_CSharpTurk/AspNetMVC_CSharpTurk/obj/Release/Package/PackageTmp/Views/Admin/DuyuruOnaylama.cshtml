@@ -1,0 +1,113 @@
+﻿@model IEnumerable<AspNetMVC_CSharpTurk.Models.DatabaseObjectModels.Duyuru>
+
+@{
+    ViewBag.Title = " Duyuru Onaylama | Admin Panel";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script>
+    var module = angular.module('angular');
+    module.controller('duyuruKontrolController', ['$scope', '$http', function ($scope, $http) {
+        $scope.currentPage = 0;
+        $scope.pageSize = 10;
+        $scope.numberOfPages = function () {
+            return Math.ceil($scope.duyurular.length / $scope.pageSize);
+        }
+        $scope.gorunmez = []
+        $http({ method: 'GET', url: '/api/DuyuruAPI/Kontrol' }).success(function (data, status, headers, config) {
+            $scope.duyurular = data;
+            $scope.topDuyuru = data.length;
+            for (var i = 0; i < $scope.topDuyuru; i++) {
+                $scope.gorunmez[i] = false;
+            }
+        }).error(function (data, status, headers, config) {
+            alert('Bilgileri alırken bir hata oluştu. Sayfayı yenileyerek tekrar deneyin!');
+        })
+        $scope.Onayla = function (duyuruId, index) {
+            $http({ method: 'HEAD', url: '/api/DuyuruAPI/Onay/' + duyuruId }).success(function (data, status, headers, config) {
+                //başarılı
+                $scope.gorunmez[index] = true;
+            }).error(function (data, status, headers, config) {
+                alert('İşlem gerçekleşmedi tekrar deneyin!');
+            })
+        }
+        $scope.Reddet = function (duyuruId, index) {
+            $http({ method: 'HEAD', url: '/api/DuyuruAPI/Red/' + duyuruId }).success(function (data, status, headers, config) {
+                //başarılı
+                $scope.gorunmez[index] = true;
+            }).error(function (data, status, headers, config) {
+                alert('İşlem gerçekleşmedi tekrar deneyin!');
+            })
+        }
+    }]);
+
+    module.filter('startFrom', function () {
+        return function (input, start) {
+            start = +start; //parse to int
+            return input.slice(start);
+        }
+    });
+</script>
+<br />
+<h2>Duyuru Onaylama</h2>
+<hr />
+<div class="row">
+    <div class="table-responsive col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DuyuruTarih)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DuyuruBaslik)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DuyuruOzet)
+                </th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+            <tbody id="ang_duyuruKontrol" ng-controller="duyuruKontrolController">
+                <tr ng-repeat="duyuru in duyurular | startFrom:currentPage*pageSize | limitTo:pageSize" ng-hide="gorunmez[$index]">
+                    <td>
+                        {{duyuru.DuyuruTarih | date : 'dd.MM.yyyy'}}
+                    </td>
+                    <td>
+                        {{duyuru.DuyuruBaslik}}
+                    </td>
+                    <td>
+                        {{duyuru.DuyuruOzet}}
+                    </td>
+                    <td style="">
+                        <a class="btn btn-info" href="~/Duyuru/DuyuruDetay/{{duyuru.DuyuruId}}">
+                            Detaylar <span class="glyphicon glyphicon-th-large glyphicon-info-sign
+"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-success" ng-click="Onayla(duyuru.DuyuruId,$index)" name="duyuruOnay">
+                            Onayla <span class="glyphicon glyphicon-th-large glyphicon-ok
+"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" ng-click="Reddet(duyuru.DuyuruId,$index)" name="duyuruRed">
+                            Reddet <span class="glyphicon glyphicon-th-large glyphicon-remove
+"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button class="btn btn-md btn-primary" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><span class="glyphicon glyphicon-th-large glyphicon-chevron-left"></span> Önceki </button></td>
+                    <td><strong>{{currentPage+1}}/{{numberOfPages()}}</strong></td>
+                    <td><button class="btn btn-md btn-primary" ng-disabled="currentPage >=  numberOfPages()-1 " ng-click="currentPage=currentPage+1">Sonraki <span class="glyphicon glyphicon-th-large glyphicon-chevron-right"></span></button></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

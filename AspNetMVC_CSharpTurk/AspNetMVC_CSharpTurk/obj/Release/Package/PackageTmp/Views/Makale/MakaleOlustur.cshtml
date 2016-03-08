@@ -1,0 +1,198 @@
+﻿@model AspNetMVC_CSharpTurk.Models.DatabaseObjectModels.Makale
+
+@{
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        ViewBag.Title = "Makale Oluştur | Admin Panel";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "Makale Oluştur | CSharpTürk";
+    }
+}
+<script>
+    var module = angular.module('angular');
+    module.controller('makaleOlusturController', ['$scope', '$http', function ($scope, $http) {
+        $scope.makale = {};
+        $scope.tumHatalar = {};
+        $scope.secilenEtiketler = [];
+        $scope.makaleTipleri = {};
+        $scope.etiketler = [];
+        $scope.secilenEtId = [];
+        $scope.etiketData = {};
+        $scope.submitForm = function () {
+            $http({
+                method: 'POST',
+                url: '/api/MakaleAPI/' + $scope.yazarId,
+                contentType: 'application/json',
+                data: $scope.makale,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                }
+            })
+              .success(function (data, status, headers, config) {
+                  //Etiket kayıt
+
+                  for (var i = 0; i < $scope.secilenEtiketler.length; i++) {
+                        $scope.secilenEtId.push($scope.secilenEtiketler[i].EtiketId);
+                  };
+
+                  $http({
+                      method: 'POST',
+                      url: '/api/EtiketAPI/EtiketEkle/' + data,
+                      contentType: 'application/json',
+                      params: {
+                          etiketIds : $scope.secilenEtId,
+                      },
+                      data: {etiketIds : $scope.secilenEtId},
+                      isArray:true,
+                      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  }).success(function (data,status,headers,config) {
+                      alert('Makale kaydedildi ...');
+                      window.location = "/Yazar/Index";
+                  }).error(function (data,status,headers,config) {
+                      alert('Makale kaydedildi ancak etiketler eklenemedi. Lütfen makale düzenle bölümünden etiketleri ekleyin.');
+                      window.location = "/Yazar/Index";
+                  })
+              }).error(function (data, status, headers, config) {
+                  if (status == 400) {
+                      $scope.tumHatalar = data.ModelState;
+                      //alert(data.errors.MakaleBaslik);
+                      alert('Form elemanlarını kontrol edin!');
+                      //location.reload();
+                  } else {
+                      alert('Hata oluştu lütfen bilgileri kontrol edin!');
+                  }
+
+              })
+        };
+
+        $http({ method: 'GET', url: '/api/MakaleAPI/MakaleTipleri' }).success(function (data, status, headers, config) {
+            $scope.makaleTipleri = data;
+        })
+
+        $http({ method: 'GET', url: '/api/EtiketAPI/Etiketler' }).success(function (data,status,headers,config) {
+            $scope.etiketler = data;
+        })
+
+        $scope.EtiketEkle = function () {
+            if ($scope.secilen == null || $scope.secilen == "") return;
+            $scope.geciciEtiket = {};
+            for (var i = 0; i < $scope.etiketler.length; i++) {
+                if (angular.equals($scope.etiketler[i].EtiketAdi,$scope.secilen)) {
+                    $scope.geciciEtiket = $scope.etiketler[i];
+                    break;
+                };
+            };
+            $scope.secilenEtiketler.push($scope.geciciEtiket);
+            var index = $scope.etiketler.indexOf($scope.geciciEtiket);
+            $scope.etiketler.splice(index, 1);
+            $scope.secilen = "";
+        }
+        $scope.EtiketCikar = function (idx) {
+            $scope.etiketler.push($scope.secilenEtiketler[idx]);
+            $scope.secilenEtiketler.splice(idx, 1);
+        }
+    }]);
+</script>
+<div class="container">
+    <div class="row sifirla">
+        <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12" id="makale" ng-controller="makaleOlusturController" ng-init="yazarId='@ViewBag.userId'">
+            <h4>Makale</h4>
+            <hr />
+            <form name="formMakaleOlustur" ng-submit="submitForm()">
+                <ul ng-repeat="alan in tumHatalar">
+                    <li style="color:red" ng-repeat="hata in alan">{{hata}}</li> <!--Bir alanda birde çok hata olabilir!!-->
+                    <!--alan : MakaleBaşlığı, MakaleGovde, MakaleOzet-->
+                </ul>
+                <div class="form-horizontal">
+                    <br>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MakaleTipi, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select ng-model="makale.makaleTipi">
+                                <option ng-repeat="makaleTipi in makaleTipleri">{{makaleTipi.MakaleTipAdi}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MakaleBaslik, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="text" name="makaleBaslik" class="form-control" ng-model="makale.makaleBaslik">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MakaleGovde, new { @class = "control-label col-md-2" })
+                        <div>
+                            <div class="col-sm-10 col-md-10">
+                                <div text-angular ng-model="makale.makaleGovde" name="demo-editor" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MakaleOzet, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <textarea rows="3" name="makaleOzet" class="form-control" ng-model="makale.makaleOzet"> {{makale.makaleOzet}} </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Etiket Seçin", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input class="text-blue" list="etiketSecim" ng-model="secilen" name="etiketSecim">
+                            <datalist id="etiketSecim">
+                                <option ng-repeat="etiket in etiketler">{{etiket.EtiketAdi}}</option>
+                            </datalist>
+                            <input type="button" class="btn-sm btn-primary" value="Ekle" ng-click="EtiketEkle()" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Seçilen Etiketler", new { @class = "control-label col-md-2" })
+                        <div style="margin-left:-5px" class="col-md-10">
+                            <span style="background-color: #e7e7e7; border-radius: 3px; border: 1px solid red; margin-left:5px;" class="input-group pull-left" ng-repeat="etiket in secilenEtiketler">
+                                &nbsp;
+
+                                <small style="color: #454141" class=" input-group-sm">
+                                    {{etiket.EtiketAdi}}
+                                </small>
+                                &nbsp;
+                                <button ng-click="EtiketCikar($index)" class="input-group-sm btn-sm btn-danger pull-right "><span class="glyphicon glyphicon-remove"></span></button>
+                            </span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Oluştur" class="form-control btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div>
+                <a class="btn btn-primary" href="@ViewBag.previousUrl">
+                    <span class="glyphicon glyphicon-chevron-left glyphicon-th-large"></span>
+                    Geri Dön
+                </a>
+            </div>
+            <br />
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Resim Değiştir | CSharpTürk";
+}
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+
+<script>
+    var module = angular.module('angular');
+    module.controller('ResimDegistirController', ['$scope', '$http', function ($scope, $http) {
+        $scope.tumHatalar = {}
+        $scope.calis = function (ID) {
+            $http({ method: 'GET', url: '/api/HesapAPI/' + ID }).success(function (data, status, headers, config) {
+                if (status == 200) {
+                    $scope.ResimURL = data.ResimURL;
+                    $scope.UserName = data.UserName;
+                }
+            }).error(function (data, status, headers, config) {
+                if (status == 405) {
+                    $scope.tumHatalar = data.ModelState;
+                }
+            })
+        };
+        $scope.Degistir = function (ID,resim) {
+            $http({ method: 'GET', url: '/api/HesapAPI/ResimDegistir/' + ID + '/' + resim, }).success(function (data,status,headers,config) {
+                alert('Kullanıcı resmi başarıyla değiştirildi!');
+                window.location = "/Yazar/Index";
+            }).error(function (data,status,headers,config) {
+                $scope.tumHatalar = data.ModelState;
+            })
+        }
+    }])
+</script>
+
+<div class="container">
+    <div class="row sifirla" ng-controller="ResimDegistirController">
+        <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12" ng-init="calis('@ViewBag.yazarId')">
+            <div class="form-horizontal">
+                <ul ng-repeat="alan in tumHatalar">
+                    <li style="color:red" ng-repeat="hata in alan">{{hata}}</li>
+                </ul>
+            </div>
+            <div class="col-md-offset-1">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="pull-left" for="KullaniciResmi">Kullanıcı Resmi </label>
+                        <div class="col-md-2">
+                            @if (ViewBag.resimYolu == null)
+                            {
+                                <img style="width:160px;height:160px" src="{{ResimURL}}" class="img-circle" alt="User Image">
+                            }
+                            else
+                            {
+                                <img style="width:160px;height:160px" src="@ViewBag.resimYolu" class="img-circle" alt="User Image">
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+                @using (Html.BeginForm("ResimDegistir", "Yazar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="">Resim Yükle</label>
+                            <div class="col-md-2">
+                                <input class="" type="file" name="file" id="file" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-2">
+                                <input type="submit" value="Yükle" class="btn btn-primary submit" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" ng-click="Degistir('@ViewBag.yazarId','@ViewBag.resim')">Onayla</button>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+    </div>
+</div>

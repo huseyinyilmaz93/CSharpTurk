@@ -1,0 +1,102 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Statik Sayfalar | Admin Panel";
+}
+
+<script>
+    var module = angular.module('angular'); 
+    module.controller('StatikSayfalarController', ['$scope', '$http', function ($scope, $http) {
+        $http({ method: 'GET', url: '/api/StatikSayfaAPI/StatikSayfalar' }).success(function (data,status,headers,config) {
+            $scope.statikSayfalar = data;
+        }).error(function (data, status, headers, config) {
+
+        })
+        $scope.Sil = function (id,index) {
+            $http({ method: 'DELETE', url: '/api/StatikSayfaAPI/StatikSayfaSil/' + id})
+                .success(function (data, status, headers, config) {
+                    alert('Silme işlemi başarılı!');
+                    $scope.statikSayfalar.splice(index, 1);
+                }).error(function (data, status, headers, config) {
+                    alert('Silme işlemi gerçekleşirken bir hata oluştu!');
+                })
+        }
+    }]);
+
+    module.directive('ngConfirmClick', [
+    function () {
+        return {
+            link: function (scope, element, attr) {
+                var msg = attr.ngConfirmClick || "Are you sure?";
+                var clickAction = attr.confirmedClick;
+                element.bind('click', function (event) {
+                    if (window.confirm(msg)) {
+                        scope.$eval(clickAction)
+                    }
+                });
+            }
+        };
+    }]);
+</script>
+
+<div class="container">
+    <div class="row sifirla">
+        <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+            <a class="btn btn-primary" href="~/Admin/StatikSayfaOlustur">
+                Yeni Statik Sayfa Oluştur <span class="glyphicon glyphicon-plus glyphicon-th-large"></span>
+            </a><hr />
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                            <tr>
+                                <th>
+                                    Sayfa No
+                                </th>
+                                <th>
+                                    Sayfa Başlık
+                                </th>
+                                <th>
+                                    Sayfa Açıklama
+                                </th>
+                            </tr>
+                    </thead>
+                    <tbody id="ang_StatikSayfalar" ng-controller="StatikSayfalarController">
+                        <tr class="yazarTableMargin" 
+                            ng-repeat="statikSayfa in statikSayfalar">
+                            <td>
+                                {{statikSayfa.SayfaId}}
+                            </td>
+                            <td>{{statikSayfa.SayfaAdi}} </td>
+                            <td>{{statikSayfa.SayfaAciklama}}</td>
+                            <td>
+                                <a class="btn btn-primary" href="~/Site/StatikSayfa/{{statikSayfa.SayfaId}}">
+                                    Sayfaya Git >>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a class="btn btn-warning" href="~/Admin/StatikSayfaDuzenle/{{statikSayfa.SayfaId}}">
+                                    Düzenle <span class="glyphicon glyphicon-warning-sign
+"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" confirmed-click="Sil(statikSayfa.SayfaId,$index)" ng-confirm-click="Silmek istediğinize emin misiniz?">
+                                    Sil <span class=" glyphicon glyphicon-th-large glyphicon-remove
+                                   ">
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+

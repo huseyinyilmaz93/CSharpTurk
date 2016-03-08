@@ -1,0 +1,34 @@
+﻿@model AspNetMVC_CSharpTurk.Models.DatabaseObjectModels.Ipucu
+
+@{
+    ViewBag.Title = "IpucuDetay";
+}
+
+<h2>IpucuDetay</h2>
+<script src="~/Scripts/ipuclari.js"></script>
+<div id="ang_ipucuGetir" ng-app="ipucuGetir" ng-controller="ipucuGetirController">
+    <table ng-init="ipucuId=@ViewBag.id" class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IpucuTarih) :
+            </th>
+            <td>
+                {{ipucu.IpucuTarih | date : 'dd.MM.yyyy'}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IpucuBaslik) :
+            </th>
+            <td>
+                {{ipucu.IpucuBaslik}}
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <div ng-bind-html="rawHtmlGovde()"> </div>
+    <hr />
+    
+</div>
+<p>@Html.ActionLink("Ipucu Listesine Geri Dön", "Ipuclari")</p>
+<br />

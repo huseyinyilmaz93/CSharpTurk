@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "Anasayfa | CSharpTürk";
+}
+
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<link href="~/Content/css/layout.css" rel="stylesheet" />
+<script>
+    var module = angular.module('angular');
+    module.controller('SonEklenenMakalelerController', ['$scope', '$http', function ($scope, $http) {
+        $scope.currentPage = 0;
+        $scope.pageSize = 6;
+        $scope.sonEklenenMakaleler = {};
+        $scope.numberOfPages = function () {
+            return Math.ceil($scope.sonEklenenMakaleler.length / $scope.pageSize);
+        }
+        $http({ method: 'GET', url: '/api/MakaleAPI/Guncel30' }).success(function (data, status, headers, config) {
+            $scope.sonEklenenMakaleler = data;
+        }).error(function (data, status, header, config) {
+
+        });
+    }]);
+
+    module.filter('startFrom', function () {
+        return function (input, start) {
+            start = +start; //parse to int
+            return input.slice(start);
+        }
+    });
+
+    module.controller('HaberController', ['$scope', '$http', function ($scope, $http) {
+        $scope.guncelHaber = {};
+        $scope.guncelHaberler = {};
+        $http({ method: 'GET', url: '/api/HaberAPI/GuncelHaber' }).success(function (data, status, headers, config) {
+            $scope.guncelHaber = data;
+            $scope.GuncelResim = {
+                'background-image': 'url(' + data.ResimURL + ')'
+            };
+        }).error(function (data, status, headers, config) {
+
+        });
+        $http({ method: 'GET', url: '/api/HaberAPI/GuncelHaberler' }).success(function (data, status, headers, config) {
+            $scope.guncelHaberler = data;
+        }).error(function (data, status, headers, config) {
+
+        });
+    }]);
+
+    module.controller('EtkinlikController', ['$scope', '$http', function ($scope, $http) {
+        $scope.guncelEtkinlik = {};
+        $scope.guncelEtkinlikler = {};
+        $http({ method: 'GET', url: '/api/EtkinlikAPI/GuncelEtkinlik' }).success(function (data, status, headers, config) {
+            $scope.guncelEtkinlik = data;
+            $scope.guncelEtkinlikResim = {
+                'background-image': 'url(' + data.ResimURL + ')'
+            };
+        }).error(function (data, status, headers, config) {
+
+        });
+        $http({ method: 'GET', url: '/api/EtkinlikAPI/GuncelEtkinlikler' }).success(function (data, status, headers, config) {
+            $scope.guncelEtkinlikler = data;
+        }).error(function (data, status, headers, config) {
+
+        });
+    }]);
+
+    module.controller('IsIlaniController', ['$scope', '$http', function ($scope, $http) {
+        $scope.guncelIlan = {};
+        $scope.guncelIlanlar = {};
+        $http({ method: 'GET', url: '/api/IsIlaniAPI/GuncelIlan' }).success(function (data, status, headers, config) {
+            $scope.guncelIlan = data;
+            $scope.GuncelIlanResim = {
+                'background-image': 'url(' + data.ResimURL + ')'
+            };
+        }).error(function (data, status, headers, config) {
+
+        });
+        $http({ method: 'GET', url: '/api/IsIlaniAPI/GuncelIlanlar' }).success(function (data, status, headers, config) {
+            $scope.guncelIlanlar = data;
+        }).error(function (data, status, headers, config) {
+
+        });
+
+    }]);
+
+    module.filter('htmlToPlaintext', function () {
+          return function (text) {
+              return angular.element(text).text();
+          };
+      }
+    );
+</script>
+    <div class="row sifirla content" ng-init="{background-image:'red'}">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12 col-ls-12">
+            <div ng-controller="HaberController">
+                <div style="margin-top:5px; margin-bottom:5px" class="col-sm-4 col-md-4 col-lg-4 col-ls-4">
+                    <div class="haber-header">
+                        <span>Son Eklenen Haberler </span>
+                        <span class="glyphicon glyphicon-th pull-right"></span>
+                    </div>
+                    <div class="endofhaber-resim"></div>
+                    <div class="img-responsive haber-resim" ng-style="GuncelResim">
+                        <div class="transbox-haber">
+                            <p>
+                                <a href="~/HaberDetay/{{guncelHaber.HaberUrl}}">{{guncelHaber.HaberBaslik}}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="visible-xs">
+                    <div style="margin-left: 1px; color: #888" class="row sifirla" ng-repeat="haber in guncelHaberler">
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 col-ls-12 img-mini">
+                            <img class="img-responsive" src="{{haber.ResimURL}}" />
+                        </div>
+                        <div class="anasayfaEtiketKutu col-sm-8 col-md-8 col-lg-8 col-xs-8 col-ls-8 haber">
+                            <a class="boldfont15px" href="~/HaberDetay/{{haber.HaberUrl}}">{{haber.HaberBaslik}}</a>
+                            <p>{{haber.HaberOzet | limitTo : 65 }} ... </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-controller="EtkinlikController">
+                <div style="margin-top:5px; margin-bottom:5px" class=" col-sm-4 col-md-4 col-lg-4 col-ls-4">
+                    <div class="etkinlik-header">
+                        <span>Etkinlikler</span>
+                        <span class="glyphicon glyphicon-signal pull-right"></span>
+                    </div>
+                    <div class="endofetkinlik-resim"></div>
+                    <div class="img-responsive etkinlik-resim" ng-style="guncelEtkinlikResim">
+                        <div class="transbox-etkinlik">
+                            <p>
+                                <a href="~/EtkinlikDetay/{{guncelEtkinlik.EtkinlikRadi}}-{{guncelEtkinlik.EtkinlikId}}">{{guncelEtkinlik.EtkinlikAdi}} </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="visible-xs">
+                    <div style="margin-left: 1px; color: #888" class="row sifirla" ng-repeat="etkinlik in guncelEtkinlikler">
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 col-ls-12 img-mini">
+                            <img class="img-responsive" src="{{etkinlik.ResimURL}}" />
+                        </div>
+                        <div class="anasayfaEtiketKutu col-sm-8 col-md-8 col-lg-8 col-xs-8 col-ls-8 etkinlik">
+                            <a class="boldfont15px" href="~/EtkinlikDetay/{{etkinlik.EtkinlikRadi}}-{{etkinlik.EtkinlikId}}">{{etkinlik.EtkinlikAdi}}</a>
+                            <p class="row sifirla">
+                                <i class="fa fa-calendar col-sm-1 col-md-1 col-lg-1 col-xs-1 col-ls-1"></i><span>  Tarih-Saat: {{etkinlik.Baslangic | date:'dd.MM.yyyy HH:mm'}}</span> <br />
+                                <i class="fa fa-map-marker col-sm-1 col-md-1 col-lg-1 col-xs-1 col-ls-1"></i>   Yer: {{etkinlik.EtkinlikIlIlce}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-controller="IsIlaniController">
+                <div style="margin-top:5px; margin-bottom:5px" class="content-is-ilani col-sm-4 col-md-4 col-lg-4 col-ls-4">
+                    <div class="is-ilani-header">
+                        <span>İş İlanları</span>
+                        <span class="glyphicon glyphicon-flash pull-right"></span>
+                    </div>
+                    <div class="endofis-ilani-resim"></div>
+                    <div class="img-responsive is-ilani-resim" ng-style="GuncelIlanResim">
+                        <div class="transbox-is-ilani">
+                            <p>
+                                <a href="~/IlanDetay/{{guncelIlan.IlanUrl}}">{{guncelIlan.IlanBaslik}}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="visible-xs">
+                    <div style="margin-left:1px; color:#888" class="row sifirla" ng-repeat="ilan in guncelIlanlar">
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 col-ls-12 img-mini">
+                            <img class="img-responsive" src={{ilan.ResimURL}} />
+                        </div>
+                        <div class=" anasayfaEtiketKutu col-sm-8 col-md-8 col-lg-8 col-xs-8 col-ls-8 is-ilani">
+                            <a class="boldfont15px" href="~/IlanDetay/{{ilan.IlanUrl}}">{{ilan.IlanBaslik}}</a>
+                            <p>{{ilan.IlanOzet | limitTo:65 | htmlToPlaintext}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    <div class="row sifirla hidden-xs">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12 col-ls-12">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-4 col-ls-4" ng-controller="HaberController">
+                <div class="row sifirla" ng-repeat="haber in guncelHaberler">
+                    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 col-ls-12 img-mini">
+                        <img class="img-responsive" src="{{haber.ResimURL}}" />
+                    </div>
+                    <div class="anasayfaEtiketKutuColor col-sm-8 col-md-8 col-lg-8 col-xs-8 col-ls-8 haber">
+                        <a class="boldfont15px" href="~/HaberDetay/{{haber.HaberUrl}}">{{haber.HaberBaslik}}</a>
+                        <p class="anasayfaEtiketlerMargin">{{haber.HaberOzet | limitTo : 65 }} ... </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-4 col-ls-4" ng-controller="EtkinlikController">
+                <div class="row sifirla" ng-repeat="etkinlik in guncelEtkinlikler">
+                    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 col-ls-12 img-mini">
+                        <img class="img-responsive" src="{{etkinlik.ResimURL}}" />
+                    </div>
+                    <div class="anasayfaEtiketKutuColor col-sm-8 col-md-8 col-lg-8 col-xs-8 col-ls-8 etkinlik">
+                        <a class="boldfont15px" href="~/EtkinlikDetay/{{etkinlik.EtkinlikRadi}}-{{etkinlik.EtkinlikId}}">{{etkinlik.EtkinlikAdi}}</a>
+                        <p class="row sifirla anasayfaEtiketlerMargin">
+                            <i class="fa fa-calendar col-sm-1 col-md-1 col-lg-1 col-xs-1 col-ls-1"></i><span>  Tarih-Saat: {{etkinlik.Baslangic | date:'dd.MM.yyyy HH:mm'}}</span> <br />
+                            <i class="fa fa-map-marker col-sm-1 col-md-1 col-lg-1 col-xs-1 col-ls-1"></i>   Yer: {{etkinlik.EtkinlikIlIlce}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-4 col-ls-4" ng-controller="IsIlaniController">
+                <div class="row sifirla" ng-repeat="ilan in guncelIlanlar">
+                    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 col-ls-12 img-mini">
+                        <img class="img-responsive" src="{{ilan.ResimURL}}" />
+                    </div>
+                    <div class="anasayfaEtiketKutuColor col-sm-8 col-md-8 col-lg-8 col-xs-8 col-ls-8 is-ilani">
+                        <a class="boldfont15px" href="~/IlanDetay/{{ilan.IlanUrl}}">{{ilan.IlanBaslik}}</a>
+                        <p class="anasayfaEtiketlerMargin">{{ilan.IlanOzet | limitTo:65 | htmlToPlaintext}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="content-makale-anket-foto-galeri">
+        <div class="makaleler col-sm-12 col-md-12" ng-controller="SonEklenenMakalelerController">
+            <div class="responsive-utilities makaleler-baslik">
+                <span class="glyphicon glyphicon-cloud"></span>
+                <span>&nbsp;Son Eklenen Makaleler</span>
+            </div>
+            <div class="endofmakaleler"></div>
+            <div ng-repeat="makale in sonEklenenMakaleler | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <table>
+                        <tr>
+                            <td class="centerItem">
+                                <img class="img-circle yazarResim" src="{{makale.Yazar.ResimURL}}" /> <br />
+                                <a class="yazarLink" href="~/Site/YazarMakaleler/{{makale.Yazar.Id}}"> {{makale.Yazar.Ad}} {{makale.Yazar.Soyad}} </a>
+                            </td>
+                            <td> &nbsp;&nbsp;</td>
+                            <td colspan="4">
+                                <div>
+                                    <blockquote>
+                                        <header><a href="~/MakaleDetay/{{makale.MakaleUrl}}">{{makale.MakaleBaslik}} </a> </header>
+                                        <small><!--18:13 24 Nov' 11-->{{makale.MakaleTarih | date:'HH:mm dd-MM yy'}} <mark><b> {{makale.Ad}} {{makale.Soyad}} </b> tarafından </mark> </small>
+                                        <p>{{makale.MakaleOzet}}</p>
+                                        <span ng-repeat="etiket in makale.Etiketler"><a href="~/Site/AramaSonucu/{{etiket.EtiketAdi}}"> {{etiket.EtiketAdi}}  </a>  &nbsp;</span>
+                                    </blockquote>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+            </div>
+            <!--<div>
+                <blockquote>
+                    <header><a href="#">High Performance Queries: GPU vs. PLINQ vs. LINQ </a> </header>
+                    <small>18:13 24 Nov' 11 <mark> by Nick Klopp </mark> (new) </small>
+                    <p>For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
+                    <mark> Windows </mark> &nbsp; <mark> .NET </mark> &nbsp; <mark> LINQ </mark> &nbsp; <mark> C#5.0 </mark> &nbsp; <mark> VS2015 </mark>
+                </blockquote>
+            </div> -->
+            <div class="col-sm-offset-5 col-lg-offset-5 col-xs-offset-5 col-md-offset-5">
+                <button class="btn btn-xs btn-success" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                    <span class="glyphicon glyphicon-th-large glyphicon glyphicon-chevron-left
+"></span> Geri
+                </button>
+                <strong>{{currentPage+1}}/{{numberOfPages()}}</strong>
+
+                <button class="btn btn-xs btn-success" ng-disabled="currentPage >=  numberOfPages()-1 " ng-click="currentPage=currentPage+1">
+                    İleri <span class="glyphicon glyphicon-th-large glyphicon glyphicon-chevron-right
+"></span>
+                </button>
+            </div>
+                    
+            </div>
+        </div>

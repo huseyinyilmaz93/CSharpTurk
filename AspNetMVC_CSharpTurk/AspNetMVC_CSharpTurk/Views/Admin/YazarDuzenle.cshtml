@@ -1,0 +1,105 @@
+﻿@model AspNetMVC_CSharpTurk.Models.AccountModels.YazarDuzenleModel
+
+@{
+    ViewBag.Title = "YazarDuzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+
+
+<script>
+    var module = angular.module('angular');
+    module.controller('YazarDuzenleController', ['$scope', '$http', function ($scope, $http) {
+        $scope.yazar = {};
+        $scope.yeniYazar = {};
+        $scope.tumHatalar = {}
+        $scope.yazarId = {}
+        $scope.calis = function (ID) {
+            $http({ method: 'GET', url: '/api/HesapAPI/' + ID }).success(function (data, status, headers, config) {
+                if (status == 200) {
+                    $scope.yazar = data;
+                    $scope.KullaniciAdi = data.UserName;
+                    $scope.Ad = data.Ad;
+                    $scope.Soyad = data.Soyad;
+                    $scope.WebSite = data.WebSite;
+                    $scope.ResimURL = data.ResimURL;
+                    $scope.Email = data.Email;
+                    $scope.yazarId = ID;
+                }
+            }).error(function (data, status, headers, config) {
+                if (status == 405) {
+                    $scope.tumHatalar = data.ModelState;
+                }
+            })
+        }
+    }]);
+</script>
+<div class="container">
+    <div class="row sifirla">
+        <div ng-controller="YazarDuzenleController" ng-init="calis('@ViewBag.yazarId')" class="col-sm-11 col-lg-11 col-md-11 col-ls-11 col-xs-11">
+            <h2>{{KullaniciAdi}} Kullanıcısı ..</h2>
+
+            <div class="form-horizontal">
+                <ul ng-repeat="alan in tumHatalar">
+                    <li style="color:red" ng-repeat="hata in alan">{{hata}}</li>
+                </ul>
+            </div>
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="KullaniciResmi" class="control-label col-md-2">Kullanıcı Resmi</label>
+                    <div class="col-md-2">
+                        <img style="width:160px;height:160px" class="img-responsive img-circle" src="{{ResimURL}}" />
+                    </div>
+                </div>
+            </div>
+            @using (Html.BeginForm("DuzenlemeyiTamamla", "Admin", new { yazarId = @ViewBag.yazarId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="">Resim Yükle</label>
+                        <div class="col-md-2">
+                            <input class="" type="file" name="file" id="file" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input name="Name" id="Name" type="text" ng-model="Ad" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Surname, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input name="Surname" id="Surname" type="text" ng-model="Soyad" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WebSite, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input name="WebSite" id="WebSite" type="text" ng-model="WebSite" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EMail, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input name="EMail" id="EMail" type="text" ng-model="Email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Kaydet" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
