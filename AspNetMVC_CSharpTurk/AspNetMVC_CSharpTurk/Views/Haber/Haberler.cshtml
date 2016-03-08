@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Haberler | CSharpTürk";
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        ViewBag.Title = "Makaleler | Admin Panel";
+    }
+
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "Makaleler | CSharpTurk";
+    }
+
+}
+
+<script src="~/Scripts/angular.min.js"></script>
+<script>
+    var module = angular.module('angular');
+    module.controller('tumHaberlerController', ['$scope', '$http', function ($scope, $http) {
+        $scope.currentPage = 0;
+        $scope.pageSize = 10;
+        $scope.numberOfPages = function () {
+            return Math.ceil($scope.haberler.length / $scope.pageSize);
+        }
+        $http({ method: 'GET', url: '/api/HaberAPI/TumHaberler' }).success(function (data, status, headers, config) {
+            $scope.haberler = data;
+        }).error(function (data, status, headers, config) {
+            alert('Bilgileri alırken bir hata oluştu. Sayfayı yenileyerek tekrar deneyin!');
+        });
+    }]);
+
+    module.filter('startFrom', function () {
+        return function (input, start) {
+            start = +start; //parse to int
+            return input.slice(start);
+        }
+    });
+
+
+
+</script>
+
+<div class="container">
+    <div class="row sifirla">
+        <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+            <div class="table-responsive">
+                <table>
+                    <tbody id="ang_haberler" ng-controller="tumHaberlerController">
+                        <tr class="yazarTableMargin" ng-repeat="haber in haberler | startFrom:currentPage*pageSize | limitTo:pageSize">
+                            <td valign="middle" class="centerItem">
+                                <img class="resim160" src="{{haber.ResimURL}}" /> <br />
+                            </td>
+                            <td> &nbsp;&nbsp;</td>
+                            <td valign="middle" colspan="4">
+                                <div>
+                                    <blockquote class="blockquoteBorder0">
+                                        <header><a class="colorHaber" href="~/HaberDetay/{{haber.HaberUrl}}">{{haber.HaberBaslik}}</a> </header>
+                                        <small><!--18:13 24 Nov' 11-->{{haber.HaberTarih | date:'HH:mm dd-MM yy'}} </small>
+                                        <p>{{haber.HaberOzet}}</p>
+                                        <span ng-repeat="etiket in makale.Etiketler"><a href="~/Home/AramaSonucu/{{etiket.EtiketAdi}}"> {{etiket.EtiketAdi}}  </a>  &nbsp;</span>
+                                    </blockquote>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="6"></td>
+                            <td></td>
+                            <td class="centerItem">
+                                <button class="btn btn-md btn-primary" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                                    <span class="glyphicon glyphicon-th-large glyphicon glyphicon-chevron-left
+"></span> Önceki
+                                </button>
+                                <strong>{{currentPage+1}}/{{numberOfPages()}}</strong>
+                                <button class="btn btn-md btn-primary" ng-disabled="currentPage >=  numberOfPages()-1 " ng-click="currentPage=currentPage+1">
+                                    Sonraki <span class="glyphicon glyphicon-th-large glyphicon glyphicon-chevron-right
+"></span>
+                                </button>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

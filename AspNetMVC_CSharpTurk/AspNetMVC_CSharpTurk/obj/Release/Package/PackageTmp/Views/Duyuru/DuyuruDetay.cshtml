@@ -1,0 +1,78 @@
+﻿@model IEnumerable<AspNetMVC_CSharpTurk.Models.DatabaseObjectModels.Duyuru>
+
+@{
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        ViewBag.Title = "Duyuru | Admin Panel";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "Duyuru | CSharpTurk";
+    }
+}
+<br />
+<h2>Duyuru Detay</h2>
+
+<script>
+    var module = angular.module('angular');
+    module.controller('duyuruGetirController', ['$scope','$http',function ($scope, $http, $sce, $locale) {
+        $scope.duyuru = {};
+        angular.element(document).ready(function () {
+            $http({ method: 'GET', url: '/api/DuyuruAPI/' + $scope.duyuruId }).success(function (data, status, headers, config) {
+                $scope.duyuru = data;
+                $scope.rawHtmlGovde = function () {
+                    return $sce.trustAsHtml($scope.duyuru.DuyuruGovde);
+                }
+            }).error(function (data, status, headers, config) {
+                alert('Bilgileri alırken bir hata oluştu. Sayfayı yenileyerek tekrar deneyin!');
+            });
+        })
+    }]);
+
+</script>
+<div class="row">
+    <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+        <div class="table-responsive" id="ang_duyuruGetir" ng-controller="duyuruGetirController">
+            <table ng-init="duyuruId=@ViewBag.id" class="table table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DuyuruTarih) :
+                    </th>
+                    <td>
+                        {{duyuru.DuyuruTarih | date : 'dd.MM.yyyy'}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DuyuruBaslik) :
+                    </th>
+                    <td>
+                        {{duyuru.DuyuruBaslik}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DuyuruResimURL) :
+                    </th>
+                    <td>
+                        {{duyuru.DuyuruResimURL}}
+
+                    </td>
+                </tr>
+            </table>
+            <hr />
+            <div ng-bind-html="rawHtmlGovde()"> </div>
+            <hr />
+            <p><b>@Html.DisplayNameFor(model => model.DuyuruOzet) : </b> {{duyuru.DuyuruOzet}} </p>
+        </div>
+        <div>
+            <a class="btn btn-primary" href="@ViewBag.previousUrl">
+                <span class="glyphicon glyphicon-chevron-left glyphicon-th-large"></span>
+                Geri Dön
+            </a>
+        </div>
+        </div>
+</div>
+<br />

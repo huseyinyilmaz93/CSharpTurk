@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <div class="row sifirla">
+        <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+
+            <h2>Index</h2>
+
+            <table>
+                <tr>
+                    <td> Yazara Ait Makaleler : </td>
+                    <td> @Html.ActionLink("Makaleler", "Makaleler")</td>
+                </tr>
+                <tr>
+                    <td> Duyurular : </td>
+                    <td> @Html.ActionLink("Duyurular", "Duyurular", "Duyuru")</td>
+                </tr>
+                <tr>
+                    <td>Dosya Yükleme  :
+                    <td>@Html.ActionLink("Dosya Yükleme", "DosyaYukle", "Yazar")</td>
+                </tr>
+                <tr>
+                    <td>Bilgileri Değiştirme  :
+                    <td>@Html.ActionLink("Bilgilerimi Değiştir", "Duzenle", "Yazar")</td>
+                </tr>
+                <tr>
+                    <td>Resim Değiştirme  :
+                    <td>@Html.ActionLink("Resim Değiştir", "ResimDegistir", "Yazar")</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+        

@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "SifremiUnuttum | CSharpTürk";
+}
+
+<script>
+    var module = angular.module('angular');
+    module.controller('SifremiUnuttumController', ['$scope', '$http', function ($scope, $http) {
+        $scope.hataGorunum = true;
+        $scope.MailKontrol = function () {
+            $http({
+                method: 'POST',
+                url: '/api/HesapAPI/MailKontrol',
+                contentType: 'application/json',
+                data: $scope.mail,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                }
+            })
+            .success(function (data, status, headers, config) {
+                $scope.hataGorunum = true;
+                alert('Şifre değişim isteğiniz alınmıştır. E postanızı kontrol edin!');
+                window.location = "/Anasayfa";
+            }).error(function (data, status, headers, config) {
+                $scope.hataGorunum = false;
+                $scope.mesaj = data.Message;
+            })
+        }
+    }])
+</script>
+
+<div class="container">
+    <div class="row sifirla">
+        <div ng-controller="SifremiUnuttumController" class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12">
+            <br />
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <label>E-Mail Adres:</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="email" ng-model="mail.email" />
+                        </td>
+                        <td>
+                            <input type="submit" ng-click="MailKontrol()" value="Gönder" class="btn btn-primary" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <label ng-hide="hataGorunum" style="color:red">{{mesaj}}</label>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

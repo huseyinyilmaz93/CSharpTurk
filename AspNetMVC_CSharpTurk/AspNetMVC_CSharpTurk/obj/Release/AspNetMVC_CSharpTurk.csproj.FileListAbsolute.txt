@@ -1,0 +1,139 @@
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\AspNetMVC_CSharpTurk.dll.config
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\AspNetMVC_CSharpTurk.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\AspNetMVC_CSharpTurk.pdb
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Antlr3.Runtime.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Autofac.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\elFinder.Connector.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\elFinder.Connector.Integration.Autofac.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\EntityFramework.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\EntityFramework.SqlServer.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\FluentValidation.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\FluentValidation.Mvc.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Newtonsoft.Json.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Owin.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Net.Http.Formatting.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Helpers.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Http.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Http.WebHost.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Mvc.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Optimization.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Razor.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.Razor.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\WebGrease.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\EntityFramework.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\EntityFramework.SqlServer.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\FluentValidation.pdb
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\FluentValidation.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\FluentValidation.Mvc.pdb
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Helpers.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Mvc.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Razor.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.Razor.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Net.Http.Formatting.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Http.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Http.WebHost.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Optimization.xml
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Antlr3.Runtime.pdb
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\cs\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\da\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\de\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\es\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\fi\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\fr\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\it\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\ko\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\mk\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\nl\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\pl\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\pt\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\ru\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\sv\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\tr\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\zh-CN\FluentValidation.resources.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\obj\Release\AspNetMVC_CSharpTurk.Migrations.Initial.resources
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\obj\Release\AspNetMVC_CSharpTurk.csproj.GenerateResource.Cache
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\obj\Release\AspNetMVC_CSharpTurk.dll
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\obj\Release\AspNetMVC_CSharpTurk.pdb
+C:\Users\Hüseyin\Desktop\Proje\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\obj\Release\AspNetMVC_CSharpTurk.csprojResolveAssemblyReference.cache
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\AspNetMVC_CSharpTurk.dll.config
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\AspNetMVC_CSharpTurk.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\AspNetMVC_CSharpTurk.pdb
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Antlr3.Runtime.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Autofac.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\elFinder.Connector.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\elFinder.Connector.Integration.Autofac.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\EntityFramework.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\EntityFramework.SqlServer.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Newtonsoft.Json.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Owin.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Net.Http.Formatting.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Helpers.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Http.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Http.WebHost.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Mvc.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Optimization.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Razor.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.Razor.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\WebGrease.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\EntityFramework.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\EntityFramework.SqlServer.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Helpers.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Mvc.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Razor.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.WebPages.Razor.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Net.Http.Formatting.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Http.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Http.WebHost.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Optimization.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\Antlr3.Runtime.pdb
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\obj\Release\AspNetMVC_CSharpTurk.csprojResolveAssemblyReference.cache
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\obj\Release\AspNetMVC_CSharpTurk.Migrations.Initial.resources
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\obj\Release\AspNetMVC_CSharpTurk.csproj.GenerateResource.Cache
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\obj\Release\AspNetMVC_CSharpTurk.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\obj\Release\AspNetMVC_CSharpTurk.pdb
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\HtmlAgilityPack.dll
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\HtmlAgilityPack.pdb
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\HtmlAgilityPack.xml
+C:\Users\Hüseyin\Desktop\Proje - Kopya\AspNetMVC_CSharpTurk\AspNetMVC_CSharpTurk\bin\System.Web.Mvc.Extensions.dll

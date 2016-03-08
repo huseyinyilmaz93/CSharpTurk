@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "StatikSayfa | CSharpTürk";
+}
+
+<script>
+    var module = angular.module('angular');
+    module.controller('StatikSayfaController', ['$scope', '$http','$sce', function ($scope, $http, $sce) {
+        angular.element(document).ready(function () {
+            $http({ method: 'GET', url: '/api/StatikSayfaAPI/GetStatikSayfa/' + $scope.id })
+                .success(function (data, status, header, config) {
+                    $scope.sayfa = data;
+            }).error(function () {
+                $scope.tumHatalar = data.ModelState;
+            })
+        })
+        $scope.rawHtml = function (str) {
+            return $sce.trustAsHtml(str);
+        }
+    }]);
+</script>
+<div class="container">
+    <div class="row sifirla">
+        <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12" ng-init="id=@ViewBag.id" ng-controller="StatikSayfaController">
+            <h2>{{sayfa.SayfaAdi}}</h2>
+            <div ng-bind-html="rawHtml(sayfa.SayfaIcerik)">
+
+            </div>
+        </div>
+    </div>
+</div>
