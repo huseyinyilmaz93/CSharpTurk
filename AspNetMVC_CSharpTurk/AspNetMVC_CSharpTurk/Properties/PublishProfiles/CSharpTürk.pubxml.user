@@ -13,7 +13,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/25/2016 23:39:06</publishTime>
     </File>
     <File Include="bin/AspNetMVC_CSharpTurk.dll">
-      <publishTime>03/03/2016 18:14:36</publishTime>
+      <publishTime>03/16/2016 19:58:37</publishTime>
     </File>
     <File Include="bin/Autofac.dll">
       <publishTime>09/17/2013 18:59:54</publishTime>
@@ -94,7 +94,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/25/2016 23:52:47</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>09/17/2013 18:59:54</publishTime>
+      <publishTime>10/02/2013 13:10:10</publishTime>
     </File>
     <File Include="bin/nl/FluentValidation.resources.dll">
       <publishTime>01/25/2016 23:52:47</publishTime>
@@ -2989,7 +2989,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/26/2016 14:47:14</publishTime>
     </File>
     <File Include="Content/css/font-awesome.css">
-      <publishTime>09/01/2016 08:37:36</publishTime>
+      <publishTime>01/09/2016 08:37:36</publishTime>
     </File>
     <File Include="Content/css/font-awesome.min.css">
       <publishTime>01/13/2016 21:00:16</publishTime>
@@ -2998,7 +2998,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2015 16:18:50</publishTime>
     </File>
     <File Include="Content/css/layout.css">
-      <publishTime>03/02/2016 20:20:38</publishTime>
+      <publishTime>03/16/2016 19:33:18</publishTime>
     </File>
     <File Include="Content/css/textAngular.css">
       <publishTime>01/23/2016 17:13:02</publishTime>
@@ -3316,34 +3316,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/23/2016 22:20:44</publishTime>
     </File>
     <File Include="Content/fonts/fontawesome-webfont.eot">
-      <publishTime>09/01/2016 08:37:34</publishTime>
+      <publishTime>01/09/2016 08:37:34</publishTime>
     </File>
     <File Include="Content/fonts/fontawesome-webfont.svg">
-      <publishTime>09/01/2016 08:37:34</publishTime>
+      <publishTime>01/09/2016 08:37:34</publishTime>
     </File>
     <File Include="Content/fonts/fontawesome-webfont.ttf">
-      <publishTime>09/01/2016 08:37:34</publishTime>
+      <publishTime>01/09/2016 08:37:34</publishTime>
     </File>
     <File Include="Content/fonts/fontawesome-webfont.woff">
-      <publishTime>09/01/2016 08:37:34</publishTime>
+      <publishTime>01/09/2016 08:37:34</publishTime>
     </File>
     <File Include="Content/fonts/fontawesome-webfont.woff2">
-      <publishTime>09/01/2016 08:37:34</publishTime>
+      <publishTime>01/09/2016 08:37:34</publishTime>
     </File>
     <File Include="Content/fonts/FontAwesome.otf">
-      <publishTime>09/01/2016 08:37:34</publishTime>
+      <publishTime>01/09/2016 08:37:34</publishTime>
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.eot">
-      <publishTime>11/12/2015 15:03:08</publishTime>
+      <publishTime>12/11/2015 15:03:08</publishTime>
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.svg">
-      <publishTime>11/12/2015 15:03:08</publishTime>
+      <publishTime>12/11/2015 15:03:08</publishTime>
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>11/12/2015 15:03:08</publishTime>
+      <publishTime>12/11/2015 15:03:08</publishTime>
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.woff">
-      <publishTime>11/12/2015 15:03:08</publishTime>
+      <publishTime>12/11/2015 15:03:08</publishTime>
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.woff2">
       <publishTime>11/24/2015 11:37:04</publishTime>
@@ -3361,10 +3361,73 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/26/2016 17:41:28</publishTime>
     </File>
     <File Include="Content/images/ana-sayfa-haber-1.jpg">
-      <publishTime>06/12/2015 14:32:16</publishTime>
+      <publishTime>12/06/2015 14:32:16</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/avi.png">
+      <publishTime>03/16/2016 17:48:16</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/doc.png">
+      <publishTime>03/16/2016 17:46:22</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/docx.png">
+      <publishTime>03/16/2016 17:46:31</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/fla.png">
+      <publishTime>03/16/2016 17:44:42</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/flv.png">
+      <publishTime>03/16/2016 17:45:40</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/html.png">
+      <publishTime>03/16/2016 17:47:25</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/ico.png">
+      <publishTime>03/16/2016 17:48:42</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/klasor.png">
+      <publishTime>03/16/2016 17:53:27</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/mov.png">
+      <publishTime>03/16/2016 17:48:56</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/mp3.png">
+      <publishTime>03/16/2016 17:46:57</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/mp4.png">
+      <publishTime>03/16/2016 17:47:08</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/pdf.png">
+      <publishTime>03/16/2016 18:05:26</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/ppt.png">
+      <publishTime>03/16/2016 17:49:15</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/pptx.png">
+      <publishTime>03/16/2016 17:49:23</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/rar.png">
+      <publishTime>03/16/2016 17:49:47</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/swf.png">
+      <publishTime>03/16/2016 17:50:08</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/txt.png">
+      <publishTime>03/16/2016 17:50:10</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/xls.png">
+      <publishTime>03/16/2016 17:46:40</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/xlsx.png">
+      <publishTime>03/16/2016 17:46:48</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/xml.png">
+      <publishTime>03/16/2016 17:50:22</publishTime>
+    </File>
+    <File Include="Content/images/filemanagericon/zip.png">
+      <publishTime>03/16/2016 17:49:47</publishTime>
     </File>
     <File Include="Content/images/foto-galeri.jpg">
-      <publishTime>06/12/2015 19:39:13</publishTime>
+      <publishTime>12/06/2015 19:39:13</publishTime>
     </File>
     <File Include="Content/images/haber.jpg">
       <publishTime>01/25/2016 17:46:09</publishTime>
@@ -3373,7 +3436,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/03/2016 16:49:05</publishTime>
     </File>
     <File Include="Content/images/reklam-alani.JPG">
-      <publishTime>06/12/2015 19:18:33</publishTime>
+      <publishTime>12/06/2015 19:18:33</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>01/23/2016 20:15:40</publishTime>
@@ -3394,7 +3457,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/25/2016 23:39:01</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>02/15/2016 21:38:37</publishTime>
+      <publishTime>03/16/2016 19:28:27</publishTime>
     </File>
     <File Include="Scripts/admin.js">
       <publishTime>01/23/2016 17:49:22</publishTime>
@@ -3514,10 +3577,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/18/2016 18:04:56</publishTime>
     </File>
     <File Include="Views/Admin/Deneme.cshtml">
-      <publishTime>02/12/2016 20:08:06</publishTime>
+      <publishTime>03/06/2016 14:05:11</publishTime>
     </File>
     <File Include="Views/Admin/DuyuruOnaylama.cshtml">
-      <publishTime>01/02/2016 17:19:24</publishTime>
+      <publishTime>02/01/2016 17:19:24</publishTime>
     </File>
     <File Include="Views/Admin/DuzenlemeyiTamamla.cshtml">
       <publishTime>02/04/2016 19:24:46</publishTime>
@@ -3550,16 +3613,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/20/2016 14:27:34</publishTime>
     </File>
     <File Include="Views/Admin/YorumOnaylama.cshtml">
-      <publishTime>01/02/2016 17:19:39</publishTime>
+      <publishTime>02/01/2016 17:19:39</publishTime>
     </File>
     <File Include="Views/Duyuru/DuyuruDetay.cshtml">
       <publishTime>01/24/2016 16:06:09</publishTime>
     </File>
     <File Include="Views/Duyuru/DuyuruDuzenle.cshtml">
-      <publishTime>01/02/2016 13:29:43</publishTime>
+      <publishTime>02/01/2016 13:29:43</publishTime>
     </File>
     <File Include="Views/Duyuru/Duyurular.cshtml">
-      <publishTime>01/02/2016 17:20:30</publishTime>
+      <publishTime>02/01/2016 17:20:30</publishTime>
     </File>
     <File Include="Views/Duyuru/DuyuruOlustur.cshtml">
       <publishTime>01/30/2016 13:23:33</publishTime>
@@ -3577,10 +3640,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2016 17:55:17</publishTime>
     </File>
     <File Include="Views/Haber/HaberDetay.cshtml">
-      <publishTime>02/21/2016 15:33:48</publishTime>
+      <publishTime>03/16/2016 19:38:39</publishTime>
     </File>
     <File Include="Views/Haber/Haberler.cshtml">
       <publishTime>02/24/2016 22:26:39</publishTime>
+    </File>
+    <File Include="Views/Hesap/Deneme.cshtml">
+      <publishTime>03/06/2016 14:07:44</publishTime>
     </File>
     <File Include="Views/Hesap/GirisYap.cshtml">
       <publishTime>02/28/2016 13:14:28</publishTime>
@@ -3640,16 +3706,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/24/2016 22:32:12</publishTime>
     </File>
     <File Include="Views/Makale/MakaleDetay.cshtml">
-      <publishTime>03/03/2016 15:58:03</publishTime>
+      <publishTime>03/16/2016 19:42:15</publishTime>
     </File>
     <File Include="Views/Makale/MakaleDuzenle.cshtml">
-      <publishTime>03/03/2016 17:48:32</publishTime>
+      <publishTime>03/16/2016 18:50:27</publishTime>
     </File>
     <File Include="Views/Makale/Makaleler.cshtml">
       <publishTime>03/03/2016 18:11:51</publishTime>
     </File>
     <File Include="Views/Makale/MakaleOlustur.cshtml">
-      <publishTime>03/01/2016 22:13:04</publishTime>
+      <publishTime>03/06/2016 23:38:19</publishTime>
     </File>
     <File Include="Views/Makale/MakaleSil.cshtml">
       <publishTime>01/24/2016 21:56:23</publishTime>
@@ -3658,16 +3724,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/28/2016 01:09:11</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>11/12/2015 15:03:06</publishTime>
+      <publishTime>12/11/2015 15:03:06</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLayout.cshtml">
-      <publishTime>02/23/2016 19:53:40</publishTime>
+      <publishTime>03/16/2016 18:50:10</publishTime>
     </File>
     <File Include="Views/Shared/_DenemeLayout.cshtml">
       <publishTime>01/25/2016 14:44:11</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/03/2016 17:44:59</publishTime>
+      <publishTime>03/15/2016 22:12:19</publishTime>
     </File>
     <File Include="Views/Shared/_NotAvaible.cshtml">
       <publishTime>01/18/2016 20:13:06</publishTime>
@@ -3688,22 +3754,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/03/2016 16:04:42</publishTime>
     </File>
     <File Include="Views/Site/Yazarlar.cshtml">
-      <publishTime>03/03/2016 18:13:40</publishTime>
+      <publishTime>03/03/2016 18:22:29</publishTime>
     </File>
     <File Include="Views/Site/YazarMakaleler.cshtml">
-      <publishTime>03/03/2016 18:12:58</publishTime>
+      <publishTime>03/06/2016 13:11:30</publishTime>
     </File>
     <File Include="Views/Site/_NotAvaible.cshtml">
       <publishTime>01/18/2016 20:19:37</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>11/12/2015 15:03:06</publishTime>
+      <publishTime>12/11/2015 15:03:06</publishTime>
     </File>
     <File Include="Views/Yazar/Deneme.cshtml">
       <publishTime>01/25/2016 18:24:42</publishTime>
     </File>
     <File Include="Views/Yazar/DosyaYoneticisi.cshtml">
-      <publishTime>02/29/2016 12:54:27</publishTime>
+      <publishTime>03/16/2016 18:53:13</publishTime>
     </File>
     <File Include="Views/Yazar/DosyaYukle.cshtml">
       <publishTime>01/23/2016 17:15:37</publishTime>
@@ -3718,22 +3784,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/23/2016 15:50:06</publishTime>
     </File>
     <File Include="Views/Yazar/Index.cshtml">
-      <publishTime>02/03/2016 16:43:38</publishTime>
+      <publishTime>03/16/2016 18:49:48</publishTime>
     </File>
     <File Include="Views/Yazar/Makaleler.cshtml">
       <publishTime>02/27/2016 11:49:39</publishTime>
     </File>
     <File Include="Views/Yazar/ResimDegistir.cshtml">
-      <publishTime>01/02/2016 16:47:26</publishTime>
+      <publishTime>02/01/2016 16:47:26</publishTime>
     </File>
     <File Include="Views/Yazar/Yazarlar.cshtml">
       <publishTime>02/05/2016 16:19:19</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>11/12/2015 15:03:06</publishTime>
+      <publishTime>12/11/2015 15:03:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/16/2016 17:28:09</publishTime>
+      <publishTime>03/16/2016 19:58:41</publishTime>
     </File>
   </ItemGroup>
 </Project>

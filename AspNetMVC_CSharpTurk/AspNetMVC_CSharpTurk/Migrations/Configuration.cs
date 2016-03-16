@@ -35,7 +35,7 @@ namespace AspNetMVC_CSharpTurk.Migrations
 
             var user = new Kullanici()
             {
-                UserName = "admin",
+                UserName = "deneme",
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
             IdentityResult idResult = userManager.Create(user, "deneme");
@@ -47,7 +47,7 @@ namespace AspNetMVC_CSharpTurk.Migrations
 
             var hsyn = new Kullanici()
             {
-                UserName = "h.ylmz93",
+                UserName = "deneme",
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
 

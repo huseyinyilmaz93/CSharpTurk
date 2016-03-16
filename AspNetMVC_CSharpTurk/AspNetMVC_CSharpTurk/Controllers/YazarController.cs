@@ -17,8 +17,6 @@ namespace AspNetMVC_CSharpTurk.Controllers
         {
             return View();
         }
-        //[Authorize(Roles="Yazar")]
-        // GET: /Yazar/
         public ActionResult Yazarlar()
         {
             return View();
@@ -59,20 +57,6 @@ namespace AspNetMVC_CSharpTurk.Controllers
                 ViewBag.yazarId = User.Identity.GetUserId();
                 ViewBag.resimYolu = "/Files/KullaniciResimleri/" + tamAd;
             }
-            return View();
-        }
-        public ActionResult DosyaYukle()
-        {
-            //Configuration configuration = WebConfigurationManager.OpenWebConfiguration("~");
-            //CustomErrorsSection section = (Custom) configuration.GetSection("elfinder");
-            return View();
-        }
-        public ActionResult elFinder()
-        {
-            return View();
-        }
-        public ActionResult Deneme()
-        {
             return View();
         }
         [HttpPost]

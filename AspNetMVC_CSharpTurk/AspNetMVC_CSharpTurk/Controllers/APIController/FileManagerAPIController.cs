@@ -38,24 +38,21 @@ namespace AspNetMVC_CSharpTurk.Controllers.APIController
                 return Request.CreateErrorResponse(tupleResponse.Item2, tupleResponse.Item3);
         }
 
-        [HttpGet, Route("AltDizin/{dosyaYolu}")]
-        public HttpResponseMessage AltDizin(string dosyaYolu)
+        [HttpPost, Route("AltDizin")]
+        public HttpResponseMessage AltDizin(Yol dosya)
         {
-            FileManager fileManager = new FileManager();
-            dosyaYolu = dosyaYolu.Replace(".-123-.", "/");
-            Tuple<bool,HttpStatusCode,string,List<Dosya>> tupleResponse = fileManager.GetKlasorDizin(dosyaYolu);
+            Tuple<bool,HttpStatusCode,string,List<Dosya>> tupleResponse = fileManager.GetKlasorDizin(dosya.dosyaYolu);
             if (tupleResponse.Item1)
                 return Request.CreateResponse(tupleResponse.Item2, tupleResponse.Item4);
             else
                 return Request.CreateErrorResponse(tupleResponse.Item2, tupleResponse.Item3);
         }
 
-        [HttpGet,Route("KlasorEkle")]
-        public HttpResponseMessage KlasorEkle(string dosyaYolu,string dosyaAdi)
+        [HttpPost,Route("KlasorEkle")]
+        public HttpResponseMessage KlasorEkle(KlasorEkle klasor)
         {
-            if (dosyaYolu == null) Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Dosya yolu biçimi hatalı");
-            dosyaYolu = dosyaYolu.Replace(".-123-.", "/");
-            Tuple<bool, HttpStatusCode, string, List<Dosya>> tupleResponse = fileManager.KlasorEkle(dosyaYolu, dosyaAdi);
+            if (klasor.dosyaYolu== null) Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Dosya yolu biçimi hatalı");
+            Tuple<bool, HttpStatusCode, string, List<Dosya>> tupleResponse = fileManager.KlasorEkle(klasor.dosyaYolu, klasor.dosyaAdi);
             if (tupleResponse.Item1)
             {
                 return Request.CreateResponse(tupleResponse.Item2, tupleResponse.Item4);
@@ -78,11 +75,10 @@ namespace AspNetMVC_CSharpTurk.Controllers.APIController
 
         }
 
-        [HttpGet, Route("Geri")]
-        public HttpResponseMessage Geri(string dosyaYolu)
+        [HttpPost, Route("Geri")]
+        public HttpResponseMessage Geri(Yol dosya)
         {
-            dosyaYolu = dosyaYolu.Replace(".-123-.", "/");
-            Tuple<bool, HttpStatusCode, string, List<Dosya>> tupleResponse = fileManager.GetKlasorDizin(dosyaYolu);
+            Tuple<bool, HttpStatusCode, string, List<Dosya>> tupleResponse = fileManager.GetKlasorDizin(dosya.dosyaYolu);
             if (tupleResponse.Item1)
                 return Request.CreateResponse(tupleResponse.Item2, tupleResponse.Item4);
             else
@@ -112,11 +108,15 @@ namespace AspNetMVC_CSharpTurk.Controllers.APIController
                 return Request.CreateErrorResponse(tupleResponse.Item2, tupleResponse.Item3);
         }
 
-        [HttpGet,Route("DosyaTasi")]
-        public HttpResponseMessage DosyaTasi(string eskiYol,string yeniYol)
+        [HttpPost,Route("DosyaTasi")]
+        public HttpResponseMessage DosyaTasi(DosyaTasi dosya)
         {
-
-            return null;
+            if (dosya.EskiYol == null || dosya.YeniYol == null) Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Dosya yolu biçimi hatalı");
+            Tuple<bool, HttpStatusCode, string, List<Dosya>> tupleResponse = fileManager.Tasi(dosya.EskiYol, dosya.YeniYol, dosya.GecerliDizin);
+            if (tupleResponse.Item1)
+                return Request.CreateResponse(tupleResponse.Item2,tupleResponse.Item4);
+            else
+                return Request.CreateErrorResponse(tupleResponse.Item2, tupleResponse.Item3);
         }
     }
 }

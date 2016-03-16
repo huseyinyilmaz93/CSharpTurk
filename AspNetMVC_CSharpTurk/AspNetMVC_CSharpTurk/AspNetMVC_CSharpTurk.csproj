@@ -39,18 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=2.6.3.862, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Content\elfinder\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="elFinder.Connector, Version=0.2.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Content\elfinder\elFinder.Connector.dll</HintPath>
-    </Reference>
-    <Reference Include="elFinder.Connector.Integration.Autofac, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Content\elfinder\elFinder.Connector.Integration.Autofac.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -203,7 +191,6 @@
     <Compile Include="Controllers\APIController\DuyuruAPIController.cs" />
     <Compile Include="Controllers\APIController\EtiketAPIController.cs" />
     <Compile Include="Controllers\APIController\EtkinlikAPIController.cs" />
-    <Compile Include="Controllers\APIController\DenemeFileManagerAPIController.cs" />
     <Compile Include="Controllers\APIController\FileManagerAPIController.cs" />
     <Compile Include="Controllers\APIController\HaberAPIController.cs" />
     <Compile Include="Controllers\APIController\HataBildirAPIController.cs" />
@@ -259,6 +246,8 @@
     <Compile Include="Models\FileManager.cs" />
     <Compile Include="Models\FileManagerModels\Dosya.cs" />
     <Compile Include="Models\FileManagerModels\DosyaOzellik.cs" />
+    <Compile Include="Models\FileManagerModels\DosyaTasi.cs" />
+    <Compile Include="Models\FileManagerModels\KlasorEkle.cs" />
     <Compile Include="Models\FileManagerModels\Sil.cs" />
     <Compile Include="Models\FileManagerModels\YenidenAdlandir.cs" />
     <Compile Include="Models\FileManagerModels\Yol.cs" />
@@ -1109,109 +1098,6 @@
     <Content Include="Content\css\footer.css" />
     <Content Include="Content\css\layout.css" />
     <Content Include="Content\css\textAngular.css" />
-    <Content Include="Content\elfinder\Autofac.dll" />
-    <Content Include="Content\elfinder\Content\elfinder\css\elfinder.min.css" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\elfinder\Content\elfinder\css\smoothness-1.8.23\jquery-ui-1.8.23.custom.css" />
-    <Content Include="Content\elfinder\Content\elfinder\img\arrows-active.png" />
-    <Content Include="Content\elfinder\Content\elfinder\img\arrows-normal.png" />
-    <Content Include="Content\elfinder\Content\elfinder\img\crop.gif" />
-    <Content Include="Content\elfinder\Content\elfinder\img\dialogs.png" />
-    <Content Include="Content\elfinder\Content\elfinder\img\icons-big.png" />
-    <Content Include="Content\elfinder\Content\elfinder\img\icons-small.png" />
-    <Content Include="Content\elfinder\Content\elfinder\img\logo.png" />
-    <Content Include="Content\elfinder\Content\elfinder\img\progress.gif" />
-    <Content Include="Content\elfinder\Content\elfinder\img\quicklook-bg.png" />
-    <Content Include="Content\elfinder\Content\elfinder\img\quicklook-icons.png" />
-    <Content Include="Content\elfinder\Content\elfinder\img\resize.png" />
-    <Content Include="Content\elfinder\Content\elfinder\img\spinner-mini.gif" />
-    <Content Include="Content\elfinder\Content\elfinder\img\toolbar.png" />
-    <Content Include="Content\elfinder\Content\elfinder\js\elfinder.min.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.ar.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.bg.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.ca.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.cs.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.de.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.en.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.es.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.fa.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.fr.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.hu.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.it.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.jp.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.ko.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.LANG.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.nl.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.no.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.pl.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.pt_BR.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.ru.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.tr.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\i18n\elfinder.zh_CN.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\jquery-1.7.1.min.js" />
-    <Content Include="Content\elfinder\Content\elfinder\js\jquery-ui-1.8.11.min.js" />
-    <Content Include="Content\elfinder\Content\elfinder\sounds\rm.wav" />
-    <Content Include="Content\elfinder\elFinder.Connector.dll" />
-    <Content Include="Content\elfinder\elFinder.Connector.Integration.Autofac.dll" />
-    <Content Include="Content\elfinder\elfinder.full.css" />
-    <Content Include="Content\elfinder\elfinder.full.js" />
-    <Content Include="Content\elfinder\elfinder.min.css" />
-    <Content Include="Content\elfinder\elfinder.min.js" />
-    <Content Include="Content\elfinder\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\elfinder\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\elfinder\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\elfinder\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\elfinder\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\elfinder\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\elfinder\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\elfinder\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\elfinder\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\elfinder\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\elfinder\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\elfinder\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\elfinder\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\elfinder\jquery-ui.min.css" />
-    <Content Include="Content\elfinder\jquery-ui.min.js" />
-    <Content Include="Content\elfinder\js\elfinder.min.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.ar.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.bg.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.ca.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.cs.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.de.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.en.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.es.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.fa.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.fr.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.hu.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.it.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.jp.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.ko.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.LANG.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.nl.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.no.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.pl.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.pt_BR.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.ru.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.tr.js" />
-    <Content Include="Content\elfinder\js\i18n\elfinder.zh_CN.js" />
-    <Content Include="Content\elfinder\js\jquery-1.7.1.min.js" />
-    <Content Include="Content\elfinder\js\jquery-ui-1.8.11.min.js" />
-    <Content Include="Content\elfinder\Newtonsoft.Json.dll" />
-    <Content Include="Content\elfinder\reset.css" />
-    <Content Include="Content\elfinder\sounds\rm.wav" />
-    <Content Include="Content\elfinder\theme.css" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
@@ -1220,6 +1106,27 @@
     <Content Include="Content\images\3.jpg" />
     <Content Include="Content\images\4.jpg" />
     <Content Include="Content\images\ana-sayfa-haber-1.jpg" />
+    <Content Include="Content\images\filemanagericon\avi.png" />
+    <Content Include="Content\images\filemanagericon\doc.png" />
+    <Content Include="Content\images\filemanagericon\docx.png" />
+    <Content Include="Content\images\filemanagericon\fla.png" />
+    <Content Include="Content\images\filemanagericon\flv.png" />
+    <Content Include="Content\images\filemanagericon\html.png" />
+    <Content Include="Content\images\filemanagericon\ico.png" />
+    <Content Include="Content\images\filemanagericon\klasor.png" />
+    <Content Include="Content\images\filemanagericon\mov.png" />
+    <Content Include="Content\images\filemanagericon\mp3.png" />
+    <Content Include="Content\images\filemanagericon\mp4.png" />
+    <Content Include="Content\images\filemanagericon\pdf.png" />
+    <Content Include="Content\images\filemanagericon\ppt.png" />
+    <Content Include="Content\images\filemanagericon\pptx.png" />
+    <Content Include="Content\images\filemanagericon\rar.png" />
+    <Content Include="Content\images\filemanagericon\swf.png" />
+    <Content Include="Content\images\filemanagericon\txt.png" />
+    <Content Include="Content\images\filemanagericon\xls.png" />
+    <Content Include="Content\images\filemanagericon\xlsx.png" />
+    <Content Include="Content\images\filemanagericon\xml.png" />
+    <Content Include="Content\images\filemanagericon\zip.png" />
     <Content Include="Content\images\foto-galeri.jpg" />
     <Content Include="Content\images\haber.jpg" />
     <Content Include="Content\images\makale_icon.png" />
@@ -1227,46 +1134,20 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\admin.js" />
-    <Content Include="Scripts\ang-duyurular.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-sanitize.js" />
     <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\app.js" />
-    <Content Include="Scripts\autocomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\duyurular.js" />
-    <Content Include="Scripts\indirmeler.js" />
-    <Content Include="Scripts\ipuclari.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\makaleler.js" />
-    <Content Include="Scripts\simplePagination.js" />
     <Content Include="Scripts\textAngular-rangy.min.js" />
     <Content Include="Scripts\textAngular-sanitize.js" />
     <Content Include="Scripts\textAngular.min.js" />
     <Content Include="Scripts\textAngularSetup.js" />
-    <Content Include="Scripts\Validation\bootstrap.js" />
-    <Content Include="Scripts\Validation\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\CSharpTürk.pubxml" />
-    <None Include="Scripts\Validation\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Validation\jquery-1.10.2.js" />
-    <Content Include="Scripts\Validation\jquery-1.10.2.min.js" />
-    <None Include="Scripts\Validation\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\Validation\jquery.validate.js" />
-    <Content Include="Scripts\Validation\jquery.validate.min.js" />
-    <Content Include="Scripts\Validation\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\Validation\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\Validation\modernizr-2.6.2.js" />
-    <Content Include="Scripts\Validation\respond.js" />
-    <Content Include="Scripts\Validation\respond.min.js" />
-    <None Include="Scripts\Validation\_references.js" />
-    <Content Include="Scripts\yazar.js" />
-    <Content Include="Scripts\yorum.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1279,7 +1160,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Site\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Admin\DuyuruOnaylama.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
@@ -1305,9 +1185,6 @@
     <Content Include="Views\Makale\MakaleSil.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_NotAvaible.cshtml" />
-    <Content Include="Views\Yazar\Deneme.cshtml" />
-    <Content Include="Views\Yazar\DosyaYukle.cshtml" />
-    <Content Include="Views\Yazar\elFinder.cshtml" />
     <Content Include="Views\Yazar\Index.cshtml" />
     <Content Include="Views\Yazar\Makaleler.cshtml" />
     <Content Include="Views\Site\Deneme.cshtml" />
@@ -1327,7 +1204,6 @@
     <Content Include="Views\Site\AramaSonucu.cshtml" />
     <Content Include="Views\Admin\EtkinlikAl.cshtml" />
     <Content Include="Views\Etkinlik\EtkinlikDetay.cshtml" />
-    <Content Include="Views\Admin\Deneme.cshtml" />
     <Content Include="Views\IsIlani\IlanDetay.cshtml" />
     <Content Include="Views\Yazar\DosyaYoneticisi.cshtml" />
     <Content Include="Views\Haber\Haberler.cshtml" />
@@ -1471,9 +1347,6 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\Validation\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201602021345583_Initial.resx">

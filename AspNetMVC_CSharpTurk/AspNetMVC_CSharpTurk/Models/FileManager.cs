@@ -14,7 +14,9 @@ namespace AspNetMVC_CSharpTurk.Models
     {
         private string RootYol = "~/Files/Uploads";
 
-        private string IconYolu = "/Content/Images/klasor.png"; 
+        private string IconYolu = "/Content/images/filemanagericon/klasor.png";
+
+        private string IconPre = "/Content/images/filemanagericon/";
 
         private List<string> izinVerilenUzantilar =
             new List<string> { ".ai", ".asx", ".avi", ".bmp", ".csv", ".dat", ".doc", ".docx", ".epub", ".fla", ".flv", ".gif", ".html", ".ico", ".jpeg", ".jpg", ".m4a", ".mobi", ".mov", ".mp3", ".mp4", ".mpa", ".mpg", ".mpp", ".pdf", ".png", ".pps", ".ppsx", ".ppt", ".pptx", ".ps", ".psd", ".qt", ".ra", ".ram", ".rar", ".rm", ".rtf", ".svg", ".swf", ".tif", ".txt", ".vcf", ".vsd", ".wav", ".wks", ".wma", ".wmv", ".wps", ".xls", ".xlsx", ".xml", ".zip" }; 
@@ -90,10 +92,10 @@ namespace AspNetMVC_CSharpTurk.Models
                 }
                 else
                 {
-                    var icon = String.Format("{0}{1}.png", IconYolu, dosyaBilgi.Extension.Replace(".", ""));
-                    if (!System.IO.File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(icon)))
+                    var iconYol = string.Concat(IconPre , String.Format("{0}.png", dosyaBilgi.Extension.Replace(".", "")));
+                    if (System.IO.File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(iconYol)))
                     {
-                        dosya.ResimURL = icon;
+                        dosya.ResimURL = "/" + iconYol;
                     }
                 }
                 DosyaOzellik ozellikler = new DosyaOzellik();
@@ -170,7 +172,7 @@ namespace AspNetMVC_CSharpTurk.Models
                 }
                 else
                 {
-                    dosya.ResimURL = String.Format("{0}{1}.png", IconYolu, fileInfo.Extension.Replace(".", "").Substring(1));
+                    dosya.ResimURL = String.Format("{0}.png" , fileInfo.Extension.Replace(".", "").Substring(1));
                 }
                 DosyaOzellik ozellik = new DosyaOzellik();
                 ozellik.OlusturulmaTarihi = fileInfo.CreationTime;
@@ -193,19 +195,19 @@ namespace AspNetMVC_CSharpTurk.Models
 
         } 
 
-        public Tuple<bool,HttpStatusCode, string> Tasi(string eskiYol, string yeniYol)
+        public Tuple<bool,HttpStatusCode, string, List<Dosya>> Tasi(string eskiYol, string yeniYol, string gecerliDizin)
         {
             if (!RootIcindeMi(eskiYol))
             {
-                return new Tuple<bool,HttpStatusCode, string>(false,HttpStatusCode.BadRequest,"Belirtilen eski dosya yolu anadizin içerisinde değil");
+                return new Tuple<bool, HttpStatusCode, string, List<Dosya>>(false, HttpStatusCode.BadRequest, "Belirtilen eski dosya yolu anadizin içerisinde değil", null);
             }
             else if (!RootIcindeMi(yeniYol))
             {
-                return new Tuple<bool, HttpStatusCode, string>(false,HttpStatusCode.BadRequest, "Belirtilen yeni dosya yolu anadizin içerisinde değildir");
+                return new Tuple<bool, HttpStatusCode, string, List<Dosya>>(false, HttpStatusCode.BadRequest, "Belirtilen yeni dosya yolu anadizin içerisinde değildir", null);
             }
             else if (!System.IO.File.Exists(System.Web.Hosting.HostingEnvironment.MapPath(eskiYol)) && !Directory.Exists(System.Web.Hosting.HostingEnvironment.MapPath(eskiYol)))
             {
-                return new Tuple<bool, HttpStatusCode, string>(false,HttpStatusCode.BadRequest, "Taşımak için seçilen dosya bulunamadı.");
+                return new Tuple<bool, HttpStatusCode, string, List<Dosya>>(false, HttpStatusCode.BadRequest, "Taşımak için seçilen dosya bulunamadı.", null);
             }
 
             FileAttributes attr = System.IO.File.GetAttributes(System.Web.Hosting.HostingEnvironment.MapPath(eskiYol));
@@ -221,17 +223,16 @@ namespace AspNetMVC_CSharpTurk.Models
             else
             {
                 FileInfo eskiDosya = new FileInfo(System.Web.Hosting.HostingEnvironment.MapPath(eskiYol));
-                FileInfo yeniDosya = new FileInfo(System.Web.Hosting.HostingEnvironment.MapPath(yeniYol));
+                FileInfo yeniDosya = new FileInfo(System.Web.Hosting.HostingEnvironment.MapPath(string.Concat(yeniYol,"/",eskiDosya.Name)));
                 if (yeniDosya.Extension != eskiDosya.Extension)
                 {
                     //Don't allow extension to be changed
                     yeniDosya = new FileInfo(Path.ChangeExtension(yeniDosya.FullName, eskiDosya.Extension));
                 }
-                System.IO.File.Move(eskiDosya.FullName, yeniDosya.FullName);
+                System.IO.File.Move(eskiDosya.FullName,yeniDosya.FullName );
 
             }
-
-            return new Tuple<bool,HttpStatusCode,string>(true,HttpStatusCode.OK,"İşlem başarılı");
+            return new Tuple<bool,HttpStatusCode,string, List<Dosya>>(true,HttpStatusCode.OK,"İşlem başarılı",this.GetKlasorDizin(gecerliDizin).Item4);
         } 
 
         public Tuple<bool,HttpStatusCode,string,List<Dosya>> YenidenAdlandir(string yol,string eskiIsim, string yeniIsim)
@@ -303,7 +304,7 @@ namespace AspNetMVC_CSharpTurk.Models
                 return new Tuple<bool, HttpStatusCode, string,List<Dosya>>(false,HttpStatusCode.BadRequest, "Dosya bulunamadı",null);
             }
 
-            FileAttributes attr = System.IO.File.GetAttributes(System.Web.Hosting.HostingEnvironment.MapPath(yol));
+            FileAttributes attr = System.IO.File.GetAttributes(System.Web.Hosting.HostingEnvironment.MapPath(string.Concat(yol, "/", dosyaAdi)));
 
             if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
             {
