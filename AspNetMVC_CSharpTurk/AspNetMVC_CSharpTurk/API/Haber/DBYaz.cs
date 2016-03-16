@@ -22,7 +22,8 @@ namespace AspNetMVC_CSharpTurk.API.Haber
                 db.Haberler.Add(haber);
                 db.SaveChanges();
                 haber.HaberUrl = haber.HaberUrl = haber.HaberBaslik.Replace(" ", "-").ToLower().Replace("ö", "o").
-                    Replace("ğ", "g").Replace("ç", "c").Replace("ü", "u").Replace("ş", "s") + "-" + haber.HaberId;
+                    Replace("ğ", "g").Replace("ç", "c").Replace("ü", "u").Replace("ş", "s").Replace(":","").
+                    Replace("'","").Replace("?","").Replace("!","") + "-" + haber.HaberId;
             }
             db.SaveChanges();
 

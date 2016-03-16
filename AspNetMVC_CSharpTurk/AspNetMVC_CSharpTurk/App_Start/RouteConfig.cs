@@ -11,11 +11,6 @@ namespace AspNetMVC_CSharpTurk
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.IgnoreRoute("elfinder.connector");
-
-
-
             routes.MapRoute(
                 name: "Anasayfa",
                 url: "Anasayfa",

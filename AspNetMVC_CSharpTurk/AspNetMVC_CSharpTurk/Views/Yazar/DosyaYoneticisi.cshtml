@@ -1,6 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "DosyaYoneticisi | CSharpTürk";
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        ViewBag.Title = "Dosya Yöneticisi | Admin Panel";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "Dosya Yöneticisi | CSharpTurk";
+    }
 }
 
 <script>
@@ -26,7 +35,17 @@
         $scope.DosyaClick = function (dosyaYolu, dosyaTuru) {
             if (dosyaTuru == 'dir') {
                 $http({
-                    method: 'GET', url: '/api/FileManagerAPI/AltDizin/' + dosyaYolu.split('/').join('.-123-.')
+                    method: 'POST',
+                    url: '/api/FileManagerAPI/AltDizin',
+                    contentType: 'application/json',
+                    data: { dosyaYolu: dosyaYolu },
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function (obj) {
+                        var str = [];
+                        for (var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        return str.join("&");
+                    }
                 }).success(function (data, status, headers, config) {
                     $scope.dosyalar = data;
                     $scope.gecerliDosyaYolu = dosyaYolu;
@@ -43,13 +62,20 @@
         $scope.KlasorEkle = function (klasorAdi) {
             $scope.yeniKlasorGorunum = !$scope.yeniKlasorGorunum;
             $scope.fxDosyaYolu = $scope.gecerliDosyaYolu;
-            $scope.fxDosyaYolu = $scope.fxDosyaYolu.split('/').join('.-123-.');
             $http({
-                method: 'GET', url: '/api/FileManagerAPI/KlasorEkle/',
-                params: {
-                    dosyaYolu: $scope.fxDosyaYolu,
-                    dosyaAdi: klasorAdi,
+                method: 'POST',
+                url: '/api/FileManagerAPI/KlasorEkle/',
+                method: 'POST', url: '/api/FileManagerAPI/KlasorEkle',
+                data: { dosyaYolu: $scope.fxDosyaYolu, dosyaAdi: klasorAdi },
+                contentType: 'application/json',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
                 }
+
             }).success(function (data, status, headers, config) {
                 $scope.dosyalar = data;
                 $scope.yeniKlasor = "Yeni Klasör";
@@ -83,15 +109,21 @@
         };
         $scope.Geri = function () {
             $scope.fxDosyaYolu = $scope.gecerliDosyaYolu;
-            if (angular.equals($scope.fxDosyaYolu,'~/Files/Uploads/' + $scope.userName)) {
+            if (!angular.equals($scope.userName,"admin") && angular.equals($scope.fxDosyaYolu,'~/Files/Uploads/' + $scope.userName)) {
                 alert('Erişim Engellendi!');
                 return;
             };
             $scope.fxDosyaYolu = $scope.fxDosyaYolu.substring(0, $scope.fxDosyaYolu.lastIndexOf('/'));
             $http({
-                method: 'GET', url: '/api/FileManagerAPI/Geri',
-                params: {
-                    dosyaYolu: $scope.fxDosyaYolu.split('/').join('.-123-.')
+                method: 'POST', url: '/api/FileManagerAPI/Geri',
+                data: { dosyaYolu: $scope.fxDosyaYolu },
+                contentType: 'application/json',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
                 }
             }).success(function (data, status, headers, config) {
                 $scope.dosyalar = data;
@@ -163,11 +195,8 @@
             objXhr.upload.addEventListener("progress", updateProgress, false);
             objXhr.addEventListener("load", transferComplete, false);
 
-            var dosyaYolu = $scope.gecerliDosyaYolu.split('/').join('.-123-.');
-            objXhr.open("POST", "/api/FileManagerAPI/DosyaYukle?dosyaYolu=" + dosyaYolu);
-            objXhr.send(datas);
-            objXhr.send(dosyaYolu);
-            
+            objXhr.open("POST", "/api/FileManagerAPI/DosyaYukle?dosyaYolu=" + $scope.gecerliDosyaYolu.split('/').join('.-123-.'));
+            objXhr.send(datas);            
         }
         function updateProgress(e) {
             if (e.lengthComputable) {
@@ -180,7 +209,18 @@
         function transferComplete(e) {
             document.getElementById('den').innerHTML = "<strong>Tamamlandı<strong>";
             $http({
-                method: 'GET', url: '/api/FileManagerAPI/AltDizin/' + $scope.gecerliDosyaYolu.split('/').join('.-123-.')
+                method: 'POST',
+                url: '/api/FileManagerAPI/AltDizin',
+                contentType: 'application/json',
+                data: { dosyaYolu: $scope.gecerliDosyaYolu },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                }
+
             }).success(function (data, status, headers, config) {
                 $scope.dosyalar = data;
             }).error(function (data, status, headers, config) {
@@ -246,12 +286,12 @@
                 method: 'GET', url: '/api/FileManagerAPI/KullaniciAnaDizin/' + $scope.userName,
             }).success(function (data, status, headers, config) {
                 $scope.dosyaTasimaDizin = [];
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].DosyaTuru == 'dir') { //KONTROL1 = DOSYA MI ? DOSYA DEGILSE DAHIL ETME
+                for (var i = 0; i < data.length ; i++) {
+                    if (data[i].DosyaTuru == 'dir') {
                         $scope.dosyaTasimaDizin.push(data[i]);
                     }
                 }
-
+                
                 $scope.gecerliTasimaYolu = "~/Files/Uploads/" + $scope.userName;
 
             }).error(function (data, status, headers, config) {
@@ -259,35 +299,62 @@
             });
         }
         $scope.DosyaTasimaDosyaClick = function (dosyaYolu) {
+            for (var i = 0; i < $scope.tasinacakDosyalar.length; i++) {
+                if(angular.equals($scope.tasinacakDosyalar[i].DosyaYolu,dosyaYolu))
+                {
+                    alert('Tasinacak dosya seçielemez!');
+                    return;
+                }
+            }
             $http({
-                method: 'GET', url: '/api/FileManagerAPI/AltDizin/' + dosyaYolu.split('/').join('.-123-.')
+                method: 'POST',
+                url: '/api/FileManagerAPI/AltDizin',
+                contentType: 'application/json',
+                data: { dosyaYolu: dosyaYolu },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                }
             }).success(function (data, status, headers, config) {
                 $scope.gecerliTasimaYolu = dosyaYolu;
                 $scope.dosyaTasimaDizin = [];
                 for (var i = 0; i < data.length; i++) {
-                    if (data[i].DosyaTuru == 'dir')
+                    if (data[i].DosyaTuru == 'dir') {
                         $scope.dosyaTasimaDizin.push(data[i]);
+                    }
                 }
             }).error(function (data, status, headers, config) {
             })
         }
         $scope.DosyaTasimaGeri = function () {
-            $scope.fxTasimaYolu = $scope.gecerliTasimaYolu;
-            if (angular.equals($scope.fxTasimaYolu, '~/Files/Uploads/' + $scope.userName)) {
+            $scope.fxTasimaYolu = $scope.gecerliTasimaYolu.substring(0, $scope.gecerliTasimaYolu.lastIndexOf('/'));
+
+            if (!angular.equals($scope.userName, "admin") && angular.equals($scope.fxTasimaYolu, '~/Files/Uploads')) {
                 alert('Erişim Engellendi!');
                 return;
             };
-            $scope.fxTasimaYolu = $scope.fxTasimaYolu.substring(0, $scope.fxTasimaYolu.lastIndexOf('/'));
             $http({
-                method: 'GET', url: '/api/FileManagerAPI/Geri',
-                params: {
-                    dosyaYolu: $scope.fxTasimaYolu.split('/').join('.-123-.')
+                method: 'POST', url: '/api/FileManagerAPI/Geri',
+                data: { dosyaYolu: $scope.fxTasimaYolu },
+                contentType: 'application/json',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
                 }
             }).success(function (data, status, headers, config) {
                 $scope.dosyaTasimaDizin = [];
                 for (var i = 0; i < data.length; i++) {
-                    if (data[i].DosyaTuru == 'dir')
-                        $scope.dosyaTasimaDizin.push(data[i]);
+                    if (data[i].DosyaTuru == 'dir') {
+                                $scope.dosyaTasimaDizin.push(data[i]);
+                       
+                
+                    }
                 }
                 $scope.gecerliTasimaYolu = $scope.fxTasimaYolu;
             }).error(function (data, status, headers, config) {
@@ -297,21 +364,36 @@
         $scope.DosyaTasi = function () {
             for (var i = 0; i < $scope.tasinacakDosyalar.length; i++) {
                 $http({
-                    method: 'GET',
-                    url: '/api/FileManagerAPI/DosyaTasi/',
-                    params:{
-                        eskiYol: $scope.tasinacakDosyalar[i].DosyaYolu,
-                        yeniYol :$scope.gecerliTasimaYolu,
+                    method: 'POST',
+                    url: '/api/FileManagerAPI/DosyaTasi',
+                    data: {
+                        YeniYol: $scope.gecerliTasimaYolu,
+                        EskiYol: $scope.tasinacakDosyalar[i].DosyaYolu,
+                        GecerliDizin: $scope.tasinacakDosyalar[i].DosyaYolu.substring(0, $scope.tasinacakDosyalar[i].DosyaYolu.lastIndexOf('/'))
                     },
+                    contentType: 'application/json',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                }).success(function (data,status,headers,config) {
-
+                    transformRequest: function (obj) {
+                        var str = [];
+                        for (var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        return str.join("&");
+                    }
+                }).success(function (data, status, headers, config) {
+                    $scope.dosyalar = data;
                 }).error(function (data, status, headers, config) {
 
                 })
+
             }
+            $scope.dosyaTasimaModalGorunum = !$scope.dosyaTasimaModalGorunum;
+            $scope.dosyaTasimaGorunum = !$scope.dosyaTasimaGorunum;
+            if($scope.dosyaTasimaGorunum)
+                for (var i = 0; i < $scope.dosyalar.length; i++) 
+                    $scope.tasimaCheckbox[i] = false;
         }
         //DOSYA TAŞIMA BİTİŞ
+
     }]);
 
     module.directive('modal', function () {
@@ -406,7 +488,7 @@
                             <tr>
                                 <th ng-hide="dosyaTasimaGorunum">Seç</th>
                                 <th>
-                                    Dosya Resim
+                                    
                                 </th>
                                 <th>Dosya Adı</th>
                                 <th>Dosya Türü</th>
@@ -433,7 +515,7 @@
                                 </td>
                                 <td>
                                     <button class="btn btn-success">
-                                        <span class="glyphicon glyphicon-download-alt"></span>
+                                        <span onclick="alert('Hazır Değil!')" class="glyphicon glyphicon-download-alt"></span>
                                     </button>
                                 </td>
 
