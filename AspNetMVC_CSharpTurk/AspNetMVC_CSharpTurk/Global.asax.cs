@@ -24,9 +24,9 @@ namespace AspNetMVC_CSharpTurk
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //HaberAPI.KontrolEt();
-            //EtkinlikAPI.KontrolEt();
-            //IlanAPI.KontrolEt();
+            HaberAPI.KontrolEt();
+            EtkinlikAPI.KontrolEt();
+            IlanAPI.KontrolEt();
         }
     }
 }
