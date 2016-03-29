@@ -1139,6 +1139,8 @@
     <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angular_spec\SiteIndex.js" />
+    <Content Include="Scripts\angular_spec\_Layout.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-ui.min.js" />

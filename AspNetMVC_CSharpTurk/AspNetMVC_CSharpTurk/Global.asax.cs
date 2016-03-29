@@ -27,15 +27,6 @@ namespace AspNetMVC_CSharpTurk
             //HaberAPI.KontrolEt();
             //EtkinlikAPI.KontrolEt();
             //IlanAPI.KontrolEt();
-
-            //string dir = "~/Files/Uploads/yunus.ozen/ch10";
-            //string parent = System.Web.Hosting.HostingEnvironment.MapPath(dir);
-            
-            //string name = Path.GetFileName(dir);
-            //string fileName = Path.Combine(parent, name + ".zip");
-            //ZipFile.CreateFromDirectory(parent, fileName, CompressionLevel.Fastest ,true);
-            //MakaleEtiketGuncelle e = new MakaleEtiketGuncelle();
-            //e.Calistir();
         }
     }
 }
