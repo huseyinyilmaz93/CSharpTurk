@@ -35,10 +35,10 @@ namespace AspNetMVC_CSharpTurk.Migrations
 
             var user = new Kullanici()
             {
-                UserName = "deneme",
+                UserName = "admin",
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
-            IdentityResult idResult = userManager.Create(user, "deneme");
+            IdentityResult idResult = userManager.Create(user, "admin123");
 
             if (idResult.Succeeded)
             {
@@ -47,11 +47,11 @@ namespace AspNetMVC_CSharpTurk.Migrations
 
             var hsyn = new Kullanici()
             {
-                UserName = "deneme",
+                UserName = "h.ylmz93",
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
 
-            idResult = userManager.Create(hsyn, "deneme");
+            idResult = userManager.Create(hsyn, "amasya05");
 
             if (idResult.Succeeded)
             {
@@ -63,7 +63,7 @@ namespace AspNetMVC_CSharpTurk.Migrations
                 UserName = "yunus.ozen",
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
-            idResult = userManager.Create(yunusozen, "deneme");
+            idResult = userManager.Create(yunusozen, "csharpturk");
 
             if (idResult.Succeeded)
             {
