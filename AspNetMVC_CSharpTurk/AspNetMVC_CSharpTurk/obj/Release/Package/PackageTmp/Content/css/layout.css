@@ -1,0 +1,568 @@
+﻿
+bg-white {
+    background-color:white;
+}
+
+a {
+    color:#888;
+
+}
+a:hover {
+    color:#888;
+}
+
+a:before {
+    color:#888;
+}
+
+sifirla {
+    margin:0;
+    padding:0;
+}
+
+.nav .nav-divider {
+        bottom:10px;
+        border: 1px solid white;
+        height: 55px;
+        background-color: #FFFFFF;
+}
+.endofnav {
+        background-color:#3982BC;
+        height:5px;
+}
+.txt {
+        height:20px;
+        font-size:10px;
+}
+.btnbtn {
+        height:20px;
+        font-size:7px;
+}
+
+.notActiveLink{
+    cursor:default;
+}
+.notActiveLink :hover {
+    text-decoration:none;
+}
+#deneme{
+    cursor:default !important;
+}
+#deneme:hover {
+    text-decoration:none !important;
+}
+.navbar-customize {
+    background-color: #58BAE9 !important;
+    border-color: none !important;
+}
+
+.navbar-brand-customize {
+color:white !important;
+}
+.navbar-brand-customize:hover {
+color:#333 !important;
+
+}
+.navbar-nav-customize > li > a {
+    color:white !important;
+}
+.navbar-nav-customize > li > a:hover {
+    color:#333 !important;
+    background-color:#4EA7D3 !important;
+}
+
+.navbar-form span {
+        position:relative;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+    background-color:#58BAE9 !important;
+    background-color:#4EA7D3 !important;
+
+}
+
+
+.arama {
+        margin-top:1%;  
+        margin-right:-3%;
+}
+
+.foot-header {
+        border-bottom:1px solid #cec8c8;
+        margin-bottom:10px;
+        font-weight: 500;
+}
+
+    .footer {
+        padding: 0px 0px 0px 0px;
+        color:#cbc8c8;
+    }
+
+
+ .user-header{height:175px;padding:10px;text-align:center}
+.user-body{padding:15px;border-bottom:1px solid #f4f4f4;border-top:1px solid #dddddd}
+.user-footer{background-color:#f9f9f9;padding:10px}
+
+    /* CONTENT */
+
+    /* Resim boyutu 350px 250px olmalı */
+    .content a {
+
+    color:#FFF;
+
+    }
+    .content a:hover {
+        color:#FFF;
+    }
+
+    .content a:before {
+        color:#FFF;
+    }
+
+    .haber-header span , .etkinlik-header span , .is-ilani-header span{
+        position:relative;
+        left:10px;
+        top:12px;
+        font-size:17px;
+        font-weight:bold;
+    }
+
+    .haber-header .glyphicon , .etkinlik-header .glyphicon , .is-ilani-header .glyphicon{
+        padding-right:25px;
+        font-size:25px;
+        font-weight:bold;
+    }
+
+    .haber-header {
+        color:#FFFFFF;
+        min-height:50px;
+        background-color:#58BAE9;
+    }
+
+    .haber-resim {
+        min-height:250px;
+        background: center url('../images/haber.jpg') no-repeat;
+    }
+
+    .transbox-haber {
+        padding: 5px 5px 5px 5px;
+        font-weight:bold;
+        color:#FFFFFF;
+        background-color:#58BAE9;
+        opacity: 0.9;
+        filter: alpha(opacity=90); /* For IE8 and earlier */
+        position: absolute;
+        bottom: -5px;
+        left: 15px;
+        right:15px;
+    }
+    
+    .endofhaber-resim {
+        margin-bottom:15px;
+        background-color:#4EA7D3;
+        height:5px;
+    }
+
+    .etkinlik-header {
+        color:#FFFFFF;
+        min-height:50px;
+        background-color:#E8A458;
+    }
+        
+    .etkinlik-resim {
+        min-height:250px;
+        background: center url('../images/haber.jpg');
+    }
+
+    .transbox-etkinlik {
+        padding: 5px 5px 5px 5px;
+        font-weight:bold;
+        color:#FFFFFF;
+        background-color:#E8A458;
+        opacity: 0.9;
+        filter: alpha(opacity=90); /* For IE8 and earlier */
+        position: absolute;
+        bottom: -5px;
+        left: 15px;
+        right:15px;
+    }
+
+    .endofetkinlik-resim {
+        margin-bottom:15px;
+        background-color:#D3954E;
+        height:5px;
+    }
+
+    .is-ilani-header {
+        color:#FFFFFF;
+        min-height:50px;
+        background-color:#E8588F;
+    }
+
+    .is-ilani-resim {
+        min-height:250px;
+        background: center url('../images/haber.jpg') no-repeat;
+    }
+
+
+    .transbox-is-ilani {
+        padding: 5px 5px 5px 5px;
+        font-weight:bold;
+        color:#FFFFFF;
+        background-color:#E8588F;
+        opacity: 0.9;
+        filter: alpha(opacity=90); /* For IE8 and earlier */
+        position: absolute;
+        bottom: -5px;
+        left: 15px;
+        right:15px;
+
+    }
+
+    .endofis-ilani-resim {
+        margin-bottom:15px;
+        background-color:#D04D7D;
+        height:5px;
+    }
+
+
+    /*RESIM HABERLER DEVAM*/
+
+    .aciklama{
+        font-size:12px;
+        color:#a99f9f;
+    }
+
+    .img-mini{
+        width:30%; 
+        min-height:30px;
+        margin-top:2.75%;
+    }
+
+    .content-text {
+        width:75%;
+        min-height:40px;
+    }
+
+    .haber h5 {
+        font-weight:600;
+        color:#58BAE9;
+    }
+
+    .etkinlik h5 {
+        font-weight:600;
+        color:#E8A458;
+    }
+
+    .is-ilani h5 {
+        font-weight:600;
+        color:#E8588F;
+    }
+
+    .haber h6 {
+        color:#58BAE9;
+    }
+    .etkinlik h6 {
+        color:#E8A458;
+    }
+    .is-ilani h6 {
+        color:#E8588F;
+    }
+
+    .haber a, .haber a:hover  {
+        color:#58BAE9;
+        font-size:12px;
+    }
+    .etkinlik a, .etkinlik a:hover  {
+        color:#E8A458;
+        font-size:12px;
+    }
+    .is-ilani a , .is-ilani a:hover  {
+        color:#E8588F;
+        font-size:12px;
+    }
+
+    .haber-1 p , .haber-2 p , .haber-3 p {
+        color:#5e5e5e;
+        font-size:12px;
+    }
+
+    /* MAKALELER VE ANKET BOLUMU*/
+
+    .makaleler-baslik {
+        color:#FFFFFF;
+        min-height:50px;
+        background-color:#48D29D;
+    }
+    .endofmakaleler {
+        margin-bottom:15px;
+        background-color:#42BB8E;
+        height:5px;
+    }
+
+    .anket-baslik {
+        color:#FFFFFF;
+        min-height:50px;
+        background-color:#977ADB;
+    }
+
+    .endofanket {
+        margin-bottom:15px;
+        background-color:#8B70C9;
+        height:5px;
+    }
+
+    .foto-galeri-baslik {
+        color:#FFFFFF;
+        min-height:50px;
+        background-color:#AAB271;
+    }
+
+    .endoffoto-galeri {
+        margin-bottom:15px;
+        background-color:#97A066;
+        height:5px;
+    }
+
+    .makaleler-baslik span , .anket-baslik span , .foto-galeri-baslik span{
+        position:relative;
+        left:10px;
+        top:12px;
+        font-size:17px;
+        font-weight:bold;
+    }
+
+    .makaleler-baslik .glyphicon , .anket-baslik .glyphicon , .foto-galeri-baslik .glyphicon{
+        font-size:20px;
+    }
+
+    blockquote a,blockquote a:hover, blockquote:after{
+        font-weight:700;
+        font-size:15px;
+        color:#42BB8E;
+    }
+    blockquote a:after,blockquote a::after(2),blockquote a::after {
+        font-weight: 700;
+        font-size: 15px;
+        color: #42BB8E;
+    }
+
+
+    blockquote > p {
+        color:#454141;
+        font-size:12px;
+    }
+
+    blockquote > footer {
+        font-size:12px;
+        color:#42BB8E;
+    }
+
+    blockquote small {
+        font-size:10px;
+    }
+
+    blockquote > span > a,blockquote > span > a:hover, blockquote > span > a:after  {
+        font-size: 11px;
+        color: #454141;
+        background-color: #e7e7e7;
+        padding: .2em;
+    }
+    blockquote > span > a:hover {
+        cursor:pointer;
+    }
+    
+
+
+    /* PAGINATION */
+
+    .pagination {
+    display:  -block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+    .pagination > li {
+        display: inline;
+    }
+
+        .pagination > li > a, .pagination > li > span {
+            font-weight:bold;
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #454141;
+            text-decoration: none;
+            background-color: #FFF;
+            border: 1px solid #ddd;
+        }
+
+        .pagination > li:first-child > a, .pagination > li:first-child > span {
+            margin-left: 0;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .pagination > li:last-child > a, .pagination > li:last-child > span {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
+            z-index: 2;
+            color: #ddd;
+            background-color: #42BB8E;
+            border-color: #ddd;
+        }
+
+    .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+        z-index: 3;
+        color: #fff;
+        cursor: default;
+        background-color: #337ab7;
+        border-color: #337ab7;
+    }
+
+    .pagination > .disabled > a, .pagination > .disabled > a:focus, .pagination > .disabled > a:hover, .pagination > .disabled > span, .pagination > .disabled > span:focus, .pagination > .disabled > span:hover {
+        color: #777;
+        cursor: not-allowed;
+        background-color: #fff;
+        border-color: #ddd;
+    }
+
+    /* PAGINATION ENDED*/
+
+    .anket-soru {
+        font-weight:600;
+        color:#977ADB;
+    }
+
+    .anket-soru .radio {
+        color:#454141;
+    }
+
+    #btn_oyla {
+        font-weight:600;
+        width:100px;
+        border-radius:0px;
+        border:none;
+        font-size:15px;
+    }
+    .btn-anket .endofanket {
+        width:100px;
+    }
+
+    .fotolar img {
+        padding:0px;
+        max-width:100%;
+        position: absolute;
+    }
+
+    .x {
+        padding:0px;
+        max-width:100%;
+        position: absolute;
+    }
+
+    .y {
+        padding:0px;
+        max-width:100%;
+        position: absolute;
+        right:4%
+    }
+
+    .z {
+        padding:0px;
+        max-width:100%;
+        position: absolute;
+        right:36%
+    }
+
+
+  /*İÇ SAYFALAR*/
+  /*Makale/Makaleler için*/
+
+  .blockquoteBorder0 {
+      border:0;
+  }
+
+  .yazarResim {
+      height:160px;
+      width:160px;
+  }
+
+  .centerItem {
+      text-align:center;
+  }
+
+  .yazarTableMargin {
+      margin-top:35px;
+      margin-bottom:35px;
+  }
+
+  .yazarLink {
+      font-size:17px;
+      font-style:italic;
+      font-weight:600;
+      color:#3982BC;
+  }
+
+  .yazarLink:hover {
+      color:#3982BC;
+  }
+
+  .yazarLink:after,.yazarLink::after,.yazarLink::after(2) {
+      color:#3982BC;
+  }
+
+  .leftItem {
+      float:left;
+  }
+
+  .boldfont15px{
+      font-size:15px !important;
+      font-weight:700;
+  }
+
+  .anasayfaEtiketlerMargin {
+      margin-top:5px;
+  }
+
+  .anasayfaEtiketKutu {
+      min-height: 130px; 
+      margin-left: -15px; 
+  }
+
+  .anasayfaEtiketKutuColor {
+      min-height: 130px; 
+      margin-left: -15px; 
+      color: #888;
+  }
+
+  .resim160 {
+      width:160px;
+  }
+
+  .colorHaber , .colorHaber:hover {
+        color:#58BAE9;
+  }
+
+  .colorEtkinlik , .colorEtkinlik:hover{
+      color:#E8A458;
+  }
+
+  .colorIsIlani , .colorIsIlani:hover {
+      color:#E8588F;
+  }
+
+  .etkinlikMarginTop {
+       margin-top:10px;
+  }
+
+  .wdthgt30 {
+      width:30px;
+      height:30px;
+  }

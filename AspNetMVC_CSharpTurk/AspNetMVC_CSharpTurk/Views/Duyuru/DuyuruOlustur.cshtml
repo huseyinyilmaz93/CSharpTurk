@@ -12,58 +12,13 @@
         ViewBag.Title = "Duyuru Oluştur | CSharpTurk";
     }
 }
-<script>
-    var module = angular.module('angular');
-    module.controller('duyuruOlusturController',['$scope','$http', function ($scope, $http) {
-        $scope.duyuru = {};
-        $scope.tumHatalar = {};
-        $scope.submitForm = function () {
-            $http({
-                method: 'POST',
-                url: '/api/DuyuruAPI/' + $scope.userId,
-                contentType: "application/json",
-                data: $scope.duyuru,
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                transformRequest: function (obj) {
-                    var str = [];
-                    for (var p in obj)
-                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                    return str.join("&");
-                }
-            })
-              .success(function (data,status,headers,config) {
-                  if (status == 200) {
-                      alert('Duyuru kaydedildi ...');
-                      window.location = "/Duyuru/Duyurular";
-
-                  } else {
-                      $scope.tumHatalar = data.ModelState;
-                      //$scope.message = data.message;
-                      alert('İşlem sırasında bir hata oluştu!');
-                  }
-              }).error(function (data, status, headers, config) {
-                  if (status == 400) {
-                      alert('Form elemanlarını kontrol edin.');
-                      $scope.tumHatalar = data.ModelState;
-                  } else if (status == 502) {
-                      alert('Verileri kaydederken bir hata oluştu! Tekrar deneyin.');
-                      window.location  = "/Duyuru/Duyurular"
-                  } else {
-                      alert('hata ?')
-                  }
-                  //window.location.reload();
-              });
-        };
-    }]);
-
-</script>
-
+<script src="~/Scripts/angular_spec/DuyuruOlustur.js"></script>
 <div class="row">
     <div class="col-sm-12 col-lg-12 col-md-12 col-ls-12 col-xs-12 ">
         <div class="col-md-12" id="duyuru" ng-init="userId='@ViewBag.userId'" ng-controller="duyuruOlusturController">
             <form name="formDuyuruOlustur" ng-submit="submitForm()">
                 <ul ng-repeat="alan in tumHatalar">
-                    <li style="color:red" ng-repeat="hata in alan">{{hata}}</li> <!--Bir alanda birde çok hata olabilir!!-->
+                    <li class="colorRed" ng-repeat="hata in alan">{{hata}}</li> <!--Bir alanda birde çok hata olabilir!!-->
                     <!--alan : DuyuruBaşlığı, DuyuruGovde, DuyuruOzet-->
                 </ul>
                 <div class="form-horizontal">

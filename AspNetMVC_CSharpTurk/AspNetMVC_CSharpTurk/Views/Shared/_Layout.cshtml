@@ -47,9 +47,9 @@
                                 <!--<li><a href="#">Link</a></li>-->
                             </ul>
                             <ul class="nav navbar-nav navbar-nav-customize navbar-right" ng-controller="NavbarController">
-                                <li><a href="~/Anasayfa"><div><div style="text-align: center; font-size: 20px" class="center-block glyphicon glyphicon-home"> </div><div style="text-align:center"> Anasayfa </div></div></a></li>
+                                <li><a href="~/Anasayfa"><div><div class="center-block glyphicon glyphicon-home font20 centerItem"> </div><div class="centerItem"> Anasayfa </div></div></a></li>
                                 <li class="dropdown" ng-controller="MakaleTipController">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div><div style="text-align:center;font-size:20px" class="center-block glyphicon glyphicon-align-center"> </div><div style="text-align:center"> Makaleler <span class="caret"></span> </div></div></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div><div class="center-block glyphicon glyphicon-align-center centerItem font20"> </div><div class="centerItem"> Makaleler <span class="caret"></span> </div></div></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="~/Makale/Makaleler"><span class="glyphicon glyphicon-align-center"></span>   Tüm Makaleler</a></li>
                                         <li role="separator" class="divider"></li>
@@ -57,24 +57,24 @@
                                     </ul>
                                 </li>
                                 <li ng-repeat="sayfa in sayfalar">
-                                    <a href="~/Site/StatikSayfa/{{sayfa.SayfaId}}"><div><div style="text-align: center; font-size: 20px" class="center-block {{sayfa.GlyphiconClass}}"> </div><div style="text-align:center"> {{sayfa.SayfaAdi}} </div></div></a>
+                                    <a href="~/Site/StatikSayfa/{{sayfa.SayfaId}}"><div><div class="centerItem font20 center-block {{sayfa.GlyphiconClass}}"> </div><div class="centerItem"> {{sayfa.SayfaAdi}} </div></div></a>
                                 </li>
-                                <li><a href="~/Haber/Haberler"><div><div style="text-align: center; font-size: 20px" class="center-block glyphicon glyphicon-th"> </div><div style="text-align:center"> Haberler </div></div></a></li>
-                                <li><a href="~/Etkinlik/Etkinlikler"><div><div style="text-align: center; font-size: 20px" class="center-block glyphicon glyphicon-signal"> </div><div style="text-align:center"> Etkinlikler </div></div></a></li>
-                                <li><a href="~/IsIlani/Ilanlar"><div><div style="text-align: center; font-size: 20px" class="center-block glyphicon glyphicon-flash"> </div><div style="text-align:center"> İş İlanları </div></div></a></li>
-                                <li><a href="~/Site/Yazarlar"><div><div style="text-align: center; font-size: 20px" class="center-block glyphicon glyphicon-user"> </div><div style="text-align:center"> Yazarlar </div></div></a></li>
+                                <li><a href="~/Haber/Haberler"><div><div class="center-block glyphicon glyphicon-th"> </div><div class="centerItem"> Haberler </div></div></a></li>
+                                <li><a href="~/Etkinlik/Etkinlikler"><div><div class="center-block glyphicon glyphicon-signal centerItem font20"> </div><div class="centerItem"> Etkinlikler </div></div></a></li>
+                                <li><a href="~/IsIlani/Ilanlar"><div><div class="center-block glyphicon glyphicon-flash centerItem font20"> </div><div class="centerItem"> İş İlanları </div></div></a></li>
+                                <li><a href="~/Site/Yazarlar"><div><div class="center-block glyphicon glyphicon-user centerItem font20"> </div><div class="centerItem"> Yazarlar </div></div></a></li>
                                 <li></li>
                                 <li></li>
                                 <li></li>
-                                <li class="dropdown" style="text-align:center" ng-controller="AramaController">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:32px" class="glyphicon glyphicon-search"></span> <span class="caret"></span></a>
+                                <li class="dropdown centerItem" ng-controller="AramaController">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-search font32"></span> <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#" style="cursor:default;">
-                                                <div ng-show="hataGorunmezlik" style="color:red">Arama yapabilmek için en az 3 karakter girilmelidir.</div>
+                                            <a href="#" class="cursorDefault">
+                                                <div ng-show="hataGorunmezlik" class="colorRed">Arama yapabilmek için en az 3 karakter girilmelidir.</div>
                                                 <form class="navbar-form navbar-right" role="search" ng-submit="Ara()">
                                                     <div class="input-group">
-                                                        <input onclick="return false" ng-model="aramaFiltresi" type="text" style="width:150px" name="srch-term" id="srch-term" class="form-control" placeholder="Site içi arama ...">
+                                                        <input class="width150" onclick="return false" ng-model="aramaFiltresi" type="text" name="srch-term" id="srch-term" class="form-control" placeholder="Site içi arama ...">
                                                         <div class="input-group-btn">
                                                             <input value="Ara" type="submit" class="btn btn-default" />
                                                         </div>
@@ -84,31 +84,31 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="dropdown" style="text-align:center">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:32px" class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
+                                <li class="dropdown centerItem" >
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user font32"></span> <span class="caret"></span></a>
                                     <ul class="dropdown-menu" ng-controller="GirisYapController">
                                         <li>
-                                            <a href="#" style="cursor:default;">
+                                            <a href="#" class="cursorDefault">
                                                 @if (!User.Identity.IsAuthenticated)
                                                 {
                                                     <form class="navbar-form navbar-right" role="search" ng-submit="submitForm()">
                                                         <div>
                                                             <ul ng-repeat="alan in tumHatalar">
-                                                                <li style="color:red" ng-repeat="hata in alan">{{hata}}</li>
+                                                                <li class="colorRed" ng-repeat="hata in alan">{{hata}}</li>
                                                             </ul>
                                                         </div>
                                                         <div class="input-group">
                                                             <span class="input-group-addon" id="basic-addon1">@@</span>
-                                                            <input name="kullaniciAdi" ng-model="kullanici.UserName" onclick="return false" style="width:150px" type="text" class="form-control" placeholder="Kullanıcı Adı" aria-describedby="basic-addon1">
+                                                            <input name="kullaniciAdi" ng-model="kullanici.UserName" onclick="return false" type="text" class="form-control width150" placeholder="Kullanıcı Adı" aria-describedby="basic-addon1">
                                                         </div><br />
                                                         <div class="input-group">
                                                             <span class="input-group-addon" id="basic-addon1">@@</span>
-                                                            <input name="sifre" ng-model="kullanici.Password" onclick="return false" style="width:150px" type="password" class="form-control" placeholder="Şifre" aria-describedby="basic-addon1">
+                                                            <input name="sifre" ng-model="kullanici.Password" onclick="return false" type="password" class="form-control width150" placeholder="Şifre" aria-describedby="basic-addon1">
                                                         </div>  <br />
-                                                        <div style="margin-top:5px" class="input-group">
+                                                        <div class="input-group marginTop5">
                                                             <input type="submit" value="Giriş" class=" center btn btn-default" />
                                                             <input ng-hide="true" type="checkbox" name="beniHatirla" ng-model="kullanici.RememberMe" aria-describedby="basic-addon1">
-                                                            <span style="cursor:pointer" ng-click="sifremiUnuttumClick()">&nbsp; Şifremi Unuttum</span>
+                                                            <span class="cursorPointer" ng-click="sifremiUnuttumClick()">&nbsp; Şifremi Unuttum</span>
                                                         </div>
                                                     </form>
 
@@ -118,7 +118,7 @@
                                                     <p>
                                                         <!-- User image -->
                                                         <div class="user-header" ng-controller="KullaniciController">
-                                                            <img style="width:160px;height:160px" src="{{gecerliKullanici.ResimURL}}" class="img-responsive img-bordered img-circle" alt="User Image">
+                                                            <img src="{{gecerliKullanici.ResimURL}}" class="wdthgt160 img-responsive img-bordered img-circle" alt="User Image">
                                                         </div>
                                                         <!-- Menu Body -->
                                                         <div class="user-body" ng-controller="KullaniciController">
@@ -132,11 +132,11 @@
                                                                 {
                                                                     <a href="~/Yazar/Index">{{gecerliKullanici.UserName}} , HOŞGELDİNİZ <br /> </a>
                                                                     <a href="~/Yazar/Index">Yazar Kullanıcı Sayfası</a>
-                                                                }
+                                                                }   
                                                             </div>
                                                         </div>
                                                         <!-- Menu Footer-->
-                                                        <div style="margin-top:45px" class="user-footer">
+                                                        <div class="user-footer marginTop45">
                                                             <div class="pull-left">
                                                                 <a href="~/Hesap/SifreDegistir" class="btn btn-default btn-flat">Şifre Değiştir </a>
                                                             </div>
@@ -191,7 +191,7 @@
                 <p>Hata Bildirin</p>
                 <form name="hataBildir" ng-submit="submitHata()" ng-controller="HataBildirController">
                     <ul ng-repeat="alan in hataBildirTumHatalar">
-                        <li style="color:red" ng-repeat="hata in alan">{{hata}}</li> <!--Bir alanda birde çok hata olabilir!!-->
+                        <li class="colorRed" ng-repeat="hata in alan">{{hata}}</li> <!--Bir alanda birde çok hata olabilir!!-->
                     </ul>
                     <input ng-model="yeniHata.email" type="text" name="email" placeholder="Email" />
                     <textarea ng-model="yeniHata.hataMesaji" name="message" placeholder="Mesaj"></textarea>

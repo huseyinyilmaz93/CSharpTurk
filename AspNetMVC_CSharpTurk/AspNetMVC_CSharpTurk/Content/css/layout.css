@@ -566,3 +566,44 @@ color:#333 !important;
       width:30px;
       height:30px;
   }
+
+  .centerItem{
+      text-align:center;
+  }
+  .font20{
+      font-size:20px;
+  }
+  .font32 {
+      font-size:32px;
+  }
+  .width150{
+      width:150px;
+  }
+  .colorRed{
+      color:red;
+  }
+  .cursorDefault{
+      cursor:default;
+  }
+  .marginTop5{
+      margin-top:5px;
+  }
+
+  .cursorPointer{
+      cursor:pointer;
+  }
+
+  .wdthgt160{
+      width:160px;
+      height:160px;
+  }
+  .marginTop45{
+      margin-top:45px;
+  }
+
+  #sifremiUnuttum{
+
+  }
+  #sifremiUnuttum:hover{
+      text-decoration:none;
+  }

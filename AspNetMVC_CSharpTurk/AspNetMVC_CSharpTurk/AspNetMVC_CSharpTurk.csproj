@@ -1139,7 +1139,14 @@
     <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angular_spec\AramaSonucu.js" />
+    <Content Include="Scripts\angular_spec\DuyuruDetay.js" />
+    <Content Include="Scripts\angular_spec\DuyuruDuzenle.js" />
+    <Content Include="Scripts\angular_spec\Duyurular.js" />
+    <Content Include="Scripts\angular_spec\DuyuruOlustur.js" />
+    <Content Include="Scripts\angular_spec\DuyuruSil.js" />
     <Content Include="Scripts\angular_spec\SiteIndex.js" />
+    <Content Include="Scripts\angular_spec\_AdminLayout.js" />
     <Content Include="Scripts\angular_spec\_Layout.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1174,7 +1181,6 @@
     <Content Include="Views\Duyuru\DuyuruSil.cshtml" />
     <Content Include="Views\Hesap\GirisYap.cshtml" />
     <Content Include="Views\Hesap\SifreDegistir.cshtml" />
-    <Content Include="Views\Site\_NotAvaible.cshtml" />
     <Content Include="Views\Ipucu\Ipuclari.cshtml" />
     <Content Include="Views\Ipucu\IpucuDetay.cshtml" />
     <Content Include="Views\Ipucu\IpucuDuzenle.cshtml" />
@@ -1186,7 +1192,6 @@
     <Content Include="Views\Makale\MakaleOlustur.cshtml" />
     <Content Include="Views\Makale\MakaleSil.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Shared\_NotAvaible.cshtml" />
     <Content Include="Views\Yazar\Index.cshtml" />
     <Content Include="Views\Yazar\Makaleler.cshtml" />
     <Content Include="Views\Site\Deneme.cshtml" />

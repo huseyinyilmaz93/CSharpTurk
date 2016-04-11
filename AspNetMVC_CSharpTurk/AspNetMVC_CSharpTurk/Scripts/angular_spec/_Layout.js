@@ -97,7 +97,7 @@ module.controller('GirisYapController', ['$scope', '$http', function ($scope, $h
     $scope.sifremiUnuttumGorunum = false;
 
     $scope.sifremiUnuttumClick = function () {
-        $scope.sifremiUnuttumGorunum = !$scope.sifremiUnuttumGorunum;
+        window.location = "/Site/SifremiUnuttum";
     };
 
     $scope.MailKontrol = function () {

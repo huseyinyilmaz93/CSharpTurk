@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<br />
+<br />
+<br />
+<table>
+    <tr>
+        <td>Yazar Ekleme : </td>
+        <td> @Html.ActionLink("Yazar Ekle", "Kayit")</td>
+    </tr>
+    <tr>
+        <td>Duyuru Onay : </td>
+        <td>@Html.ActionLink("Duyuru Kontrol", "DuyuruOnaylama")</td>
+    </tr>
+    <tr>
+        <td>Yorum Onay : </td>
+        <td> @Html.ActionLink("Yorum Kontrol", "YorumOnaylama")</td>
+    </tr>
+    <tr>
+        <td>Duyurular : </td>
+        <td> @Html.ActionLink("Duyurular", "Duyurular", "Duyuru")</td>
+    </tr>
+    <tr>
+        <td>@Html.ActionLink("Dosya Yükleme", "DosyaYukle", "Yazar")</td>
+    </tr>
+</table>
+<br />
+<br />
+<br />

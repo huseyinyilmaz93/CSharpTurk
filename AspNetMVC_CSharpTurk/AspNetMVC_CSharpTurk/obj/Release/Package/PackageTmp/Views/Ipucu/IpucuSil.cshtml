@@ -1,0 +1,49 @@
+﻿@model AspNetMVC_CSharpTurk.Models.DatabaseObjectModels.Ipucu
+
+@{
+    ViewBag.Title = "IpucuSil";
+}
+<script src="~/Scripts/ipuclari.js"></script>
+<h2>IpucuSil</h2>
+
+<h3>Silmek istediğinize emin misiniz ?</h3>
+<div id="ang_ipucuSil" ng-app="ipucuSil" ng-controller="ipucuSilController" ng-init="ipucuId = @ViewBag.id">
+    <h4>Ipucu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IpucuTarih)
+        </dt>
+
+        <dd>
+            {{ipucu.IpucuTarih | date :'dd.MM.yyyy'}}
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IpucuBaslik)
+        </dt>
+
+        <dd>
+            {{ipucu.IpucuBaslik}}
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IpucuGovde)
+        </dt>
+
+        <dd ng-bind-html="rawHtmlGovde()">
+
+        </dd>
+
+    </dl>
+
+    <form ng-submit="submitForm()">
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-default" />
+        </div>
+    </form>
+</div>
+<br />
+@Html.ActionLink("Ipucu Listesine Geri Dön", "Ipuclari")
+<br />
