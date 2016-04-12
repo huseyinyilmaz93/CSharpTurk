@@ -1145,7 +1145,11 @@
     <Content Include="Scripts\angular_spec\Duyurular.js" />
     <Content Include="Scripts\angular_spec\DuyuruOlustur.js" />
     <Content Include="Scripts\angular_spec\DuyuruSil.js" />
+    <Content Include="Scripts\angular_spec\SifremiUnuttum.js" />
     <Content Include="Scripts\angular_spec\SiteIndex.js" />
+    <Content Include="Scripts\angular_spec\StatikSayfa.js" />
+    <Content Include="Scripts\angular_spec\Yazarlar.js" />
+    <Content Include="Scripts\angular_spec\YazarMakaleler.js" />
     <Content Include="Scripts\angular_spec\_AdminLayout.js" />
     <Content Include="Scripts\angular_spec\_Layout.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1194,7 +1198,6 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Yazar\Index.cshtml" />
     <Content Include="Views\Yazar\Makaleler.cshtml" />
-    <Content Include="Views\Site\Deneme.cshtml" />
     <Content Include="Views\Admin\Yazarlar.cshtml" />
     <Content Include="Views\Admin\YazarDuzenle.cshtml" />
     <Content Include="Views\Yazar\Duzenle.cshtml" />
