@@ -27,11 +27,8 @@ namespace AspNetMVC_CSharpTurk.API.Etkinlik
             string url = "https://etkinlik.io/api/v1/etkinlikler?kategoriId=456";
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-<<<<<<< HEAD
             request.Headers.Add("X-ETKINLIK-TOKEN", "XXXX");
-=======
-            request.Headers.Add("X-ETKINLIK-TOKEN", "XXX");
->>>>>>> 05e1f883ed49e803f6711193c19995d4192a309a
+
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
             Stream resStream = response.GetResponseStream();
