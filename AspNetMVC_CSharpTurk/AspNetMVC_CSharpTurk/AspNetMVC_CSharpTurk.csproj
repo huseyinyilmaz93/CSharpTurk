@@ -1145,6 +1145,8 @@
     <Content Include="Scripts\angular_spec\Duyurular.js" />
     <Content Include="Scripts\angular_spec\DuyuruOlustur.js" />
     <Content Include="Scripts\angular_spec\DuyuruSil.js" />
+    <Content Include="Scripts\angular_spec\HaberDetay.js" />
+    <Content Include="Scripts\angular_spec\Haberler.js" />
     <Content Include="Scripts\angular_spec\SifremiUnuttum.js" />
     <Content Include="Scripts\angular_spec\SiteIndex.js" />
     <Content Include="Scripts\angular_spec\StatikSayfa.js" />

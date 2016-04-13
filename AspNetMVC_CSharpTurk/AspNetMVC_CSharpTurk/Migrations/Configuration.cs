@@ -38,7 +38,7 @@ namespace AspNetMVC_CSharpTurk.Migrations
                 UserName = "admin",
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
-            IdentityResult idResult = userManager.Create(user, "XXXX");
+            IdentityResult idResult = userManager.Create(user, "XXX");
 
             if (idResult.Succeeded)
             {
@@ -51,7 +51,7 @@ namespace AspNetMVC_CSharpTurk.Migrations
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
 
-            idResult = userManager.Create(hsyn, "XXXX");
+            idResult = userManager.Create(hsyn, "XXX");
 
             if (idResult.Succeeded)
             {
@@ -63,7 +63,7 @@ namespace AspNetMVC_CSharpTurk.Migrations
                 UserName = "yunus.ozen",
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
-            idResult = userManager.Create(yunusozen, "XXXX");
+            idResult = userManager.Create(yunusozen, "XXX");
 
             if (idResult.Succeeded)
             {

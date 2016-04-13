@@ -607,3 +607,17 @@ color:#333 !important;
   #sifremiUnuttum:hover{
       text-decoration:none;
   }
+
+  .color808080 {
+      color:#808080;
+  }
+  .colorHaber {
+      color:#58BAE9;
+  }
+  .wdthgt100{
+      width:100px;
+      height:100px; 
+  }
+  .marginLeft-50{
+      margin-left:-50px;
+  }
