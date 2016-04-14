@@ -2,64 +2,47 @@
 @{
     ViewBag.Title = "Etkinlik Detay | CSharpTürk";
 }
-
-<script>
-    var module = angular.module('angular');
-    module.controller('etkinlikGetirController', ['$scope', '$http', '$sce', function ($scope, $http,$sce) {
-        $scope.etkinlik = {};
-        $scope.rawHtmlIcerik = function () {
-            return $sce.trustAsHtml($scope.etkinlik.EtkinlikIcerik);
-        }
-        angular.element(document).ready(function () {
-            $http({ method: 'GET', url: '/api/EtkinlikAPI/EtkinlikDetay/' + $scope.etkinlikId }).success(function (data, status, headers, config) {
-                $scope.etkinlik = data;
-            }).error(function (data, status, headers, config) {
-
-            })
-        });
-    }]);
-</script>
-
+<script src="~/Scripts/angular_spec/EtkinlikDetay.js"></script>
 
 <div id="ang_etkinlikGetir" ng-init="etkinlikId=@ViewBag.etkinlikId" ng-controller="etkinlikGetirController"
      class="table-responsive col-lg-12 col-sm-12 col-md-12 col-ls-12 col-xs-12">
     <div class="row sifirla">
         <div class="visible-xs">
             <div class="col-xs-4">
-                <img class="img-bordered" style="width:100px; height:100px;" src="~/Content/images/etkinlik_icon.png" />
+                <img class="img-bordered wdthgt100" src="~/Content/images/etkinlik_icon.png" />
             </div>
             <div class="col-xs-8">
-                <h4 style="color:#E8A458">{{etkinlik.EtkinlikAdi}}</h4>
-                <small style="color:#808080"> -- {{etkinlik.Baslangic | date : 'dd.MM.yyyy HH:mm'}} </small>
-                <small style="color:#808080"> -- {{etkinlik.Bitis | date : 'dd.MM.yyyy HH:mm'}}</small>
+                <h4 class="colorEtkinlik">{{etkinlik.EtkinlikAdi}}</h4>
+                <small class="color808080"> -- {{etkinlik.Baslangic | date : 'dd.MM.yyyy HH:mm'}} </small>
+                <small class="color808080"> -- {{etkinlik.Bitis | date : 'dd.MM.yyyy HH:mm'}}</small>
             </div>
         </div>
         <div class="visible-lg">
             <div class="col-lg-2">
-                <img style="width:100px; height:100px;" src="~/Content/images/etkinlik_icon.png" />
+                <img class="wdthgt100" src="~/Content/images/etkinlik_icon.png" />
             </div>
-            <div style="margin-left:-50px" class="col-lg-10">
-                <h4 class="visible-xs" style="color:#E8A458">{{etkinlik.EtkinlikAdi}}</h4>
-                <h2 class="hidden-xs" style="color:#E8A458">{{etkinlik.EtkinlikAdi}}</h2>
-                <small style="color:#808080"> -- {{etkinlik.Baslangic | date : 'dd.MM.yyyy HH:mm'}} </small>
-                <small style="color:#808080"> -- {{etkinlik.Bitis | date : 'dd.MM.yyyy HH:mm'}}</small>
+            <div class="marginLeft-50 col-lg-10">
+                <h4 class="colorEtkinlik visible-xs">{{etkinlik.EtkinlikAdi}}</h4>
+                <h2 class="colorEtkinlik hidden-xs">{{etkinlik.EtkinlikAdi}}</h2>
+                <small class="color808080"> -- {{etkinlik.Baslangic | date : 'dd.MM.yyyy HH:mm'}} </small>
+                <small class="color808080"> -- {{etkinlik.Bitis | date : 'dd.MM.yyyy HH:mm'}}</small>
             </div>
         </div>
         <div class="hidden-xs hidden-lg">
             <div class="col-sm-2 col-md-2 col-ls-2">
-                <img class="img-bordered" style="width:100px; height:100px;" src="~/Content/images/etkinlik_icon.png" />
+                <img class="img-bordered wdthgt100" src="~/Content/images/etkinlik_icon.png" />
             </div>
             <div class="col-sm-10 col-md-10 col-ls-10">
-                <h4 class="visible-xs" style="color: #E8A458">{{etkinlik.EtkinlikAdi}}</h4>
-                <h2 class="hidden-xs" style="color:#E8A458">{{etkinlik.EtkinlikAdi}}</h2>
-                <small style="color:#808080"> -- {{etkinlik.Baslangic | date : 'dd.MM.yyyy HH:mm'}} </small>
-                <small style="color:#808080"> -- {{etkinlik.Bitis | date : 'dd.MM.yyyy HH:mm'}}</small>
+                <h4 class="colorEtkinlik visible-xs">{{etkinlik.EtkinlikAdi}}</h4>
+                <h2 class="colorEtkinlik hidden-xs">{{etkinlik.EtkinlikAdi}}</h2>
+                <small class="color808080"> -- {{etkinlik.Baslangic | date : 'dd.MM.yyyy HH:mm'}} </small>
+                <small class="color808080"> -- {{etkinlik.Bitis | date : 'dd.MM.yyyy HH:mm'}}</small>
             </div>
         </div>
     </div>
     <br />
     <blockquote>
-        <h4 style="color: #E8A458"> Etkinlik Adresi : </h4> <p> {{etkinlik.EtkinlikAdres}} {{etkinlik.EtkinlikIlIlce}} </p>
+        <h4 class="colorEtkinlik"> Etkinlik Adresi : </h4> <p> {{etkinlik.EtkinlikAdres}} {{etkinlik.EtkinlikIlIlce}} </p>
 
     </blockquote>
 
