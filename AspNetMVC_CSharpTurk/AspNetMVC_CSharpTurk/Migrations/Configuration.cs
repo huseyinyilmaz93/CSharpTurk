@@ -23,13 +23,13 @@ namespace AspNetMVC_CSharpTurk.Migrations
 
             if (!roleManager.RoleExists("Admin"))
             {
-                Rol adminRole = new Rol("Admin", "Sistem yˆneticisi");
+                Rol adminRole = new Rol("Admin", "Sistem y√∂neticisi");
                 roleManager.Create(adminRole);
             }
 
             if (!roleManager.RoleExists("Yazar"))
             {
-                Rol yazarRole = new Rol("Yazar", "Site iÁerisinde makale yay˝nlamak iÁin gerekli kullan˝c˝ t¸r¸");
+                Rol yazarRole = new Rol("Yazar", "Site i√ßerisinde makale yay√Ωnlamak i√ßin gerekli kullan√Ωc√Ω t√ºr√º");
                 roleManager.Create(yazarRole);
             }
 
@@ -38,7 +38,7 @@ namespace AspNetMVC_CSharpTurk.Migrations
                 UserName = "admin",
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
-            IdentityResult idResult = userManager.Create(user, "admin123");
+            IdentityResult idResult = userManager.Create(user, "XX");
 
             if (idResult.Succeeded)
             {
@@ -51,7 +51,7 @@ namespace AspNetMVC_CSharpTurk.Migrations
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
 
-            idResult = userManager.Create(hsyn, "amasya05");
+            idResult = userManager.Create(hsyn, "XX");
 
             if (idResult.Succeeded)
             {
@@ -63,7 +63,7 @@ namespace AspNetMVC_CSharpTurk.Migrations
                 UserName = "yunus.ozen",
                 ResimURL = "/Files/KullaniciResimleri/default.jpg"
             };
-            idResult = userManager.Create(yunusozen, "csharpturk");
+            idResult = userManager.Create(yunusozen, "XXX");
 
             if (idResult.Succeeded)
             {
@@ -74,8 +74,8 @@ namespace AspNetMVC_CSharpTurk.Migrations
                 context.Kategoriler.Add(new Kategori() { KategoriAdi = "Makale" });
             if (context.Kategoriler.Where(k => k.KategoriAdi == "Duyuru").Select(e => e).FirstOrDefault() == null)
                 context.Kategoriler.Add(new Kategori() { KategoriAdi = "Duyuru" });
-            if (context.Kategoriler.Where(k => k.KategoriAdi == "Gˆrsel Ders").Select(e => e).FirstOrDefault() == null)
-                context.Kategoriler.Add(new Kategori() { KategoriAdi = "Gˆrsel Ders" });
+            if (context.Kategoriler.Where(k => k.KategoriAdi == "G√∂rsel Ders").Select(e => e).FirstOrDefault() == null)
+                context.Kategoriler.Add(new Kategori() { KategoriAdi = "G√∂rsel Ders" });
             if (context.Kategoriler.Where(k => k.KategoriAdi == "Yorum").Select(e => e).FirstOrDefault() == null)
                 context.Kategoriler.Add(new Kategori() { KategoriAdi = "Yorum" });
             if (context.Kategoriler.Where(k => k.KategoriAdi == "Indirme").Select(e => e).FirstOrDefault() == null)
@@ -88,8 +88,8 @@ namespace AspNetMVC_CSharpTurk.Migrations
                 context.Kategoriler.Add(new Kategori() { KategoriAdi = "Haber" });
             if (context.Kategoriler.Where(k => k.KategoriAdi == "Hata").Select(e => e).FirstOrDefault() == null)
                 context.Kategoriler.Add(new Kategori() { KategoriAdi = "Hata" });
-            if (context.Kategoriler.Where(k => k.KategoriAdi == "›˛ ›lan˝").Select(e => e).FirstOrDefault() == null)
-                context.Kategoriler.Add(new Kategori() { KategoriAdi = "›˛ ›lan˝" });
+            if (context.Kategoriler.Where(k => k.KategoriAdi == "√ù√æ √ùlan√Ω").Select(e => e).FirstOrDefault() == null)
+                context.Kategoriler.Add(new Kategori() { KategoriAdi = "√ù√æ √ùlan√Ω" });
             if (context.Kategoriler.Where(k => k.KategoriAdi == "Statik Sayfa").Select(e => e).FirstOrDefault() == null)
                 context.Kategoriler.Add(new Kategori() { KategoriAdi = "Statik Sayfa" });
 
@@ -120,8 +120,8 @@ namespace AspNetMVC_CSharpTurk.Migrations
             if (context.MakaleTipleri.Where(m => m.MakaleTipAdi == "Windows Azure").Select(m => m).FirstOrDefault() == null)
                 context.MakaleTipleri.Add(new MakaleTip() { MakaleTipAdi = "Windows Azure" });
 
-            if (context.MakaleTipleri.Where(m => m.MakaleTipAdi == "›leri Programlama").Select(m => m).FirstOrDefault() == null)
-                context.MakaleTipleri.Add(new MakaleTip() { MakaleTipAdi = "›leri Programlama" });
+            if (context.MakaleTipleri.Where(m => m.MakaleTipAdi == "√ùleri Programlama").Select(m => m).FirstOrDefault() == null)
+                context.MakaleTipleri.Add(new MakaleTip() { MakaleTipAdi = "√ùleri Programlama" });
 
             context.SaveChanges();
         }
